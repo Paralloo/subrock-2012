@@ -1,4 +1,9 @@
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(user/(.*?))/?$ channel.php?n=$2
+RewriteRule ^(user/(.*?)/videos)/?$ channel_videos.php?n=$2
+RewriteRule ^(user/(.*?)/discussion)/?$ channel_discussion.php?n=$2
+RewriteRule ^(user/(.*?)/feed)/?$ channel_feed.php?n=$2
+RewriteRule ^(user/(.*?)/featured)/?$ channel.php?n=$2
 RewriteRule ^([^\.]+)$ $1.php [NC,L]
