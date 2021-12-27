@@ -50,7 +50,7 @@
 						</div>
 						<div class="yt-alert-buttons"></div><div class="yt-alert-content" role="alert">    <span class="yt-alert-vertical-trick"></span>
 							<div class="yt-alert-message">
-								You are under an upload cooldown. Please wait 10 minutes.
+								You are under an upload cooldown. Please wait 5 minutes.
 							</div>
 						</div></div></div>
 					<?php } ?>

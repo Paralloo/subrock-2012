@@ -158,7 +158,9 @@
 									<p class="intro-text" style="line-height: 18px;margin-bottom: 20px;">
 										Founded in December 2021, SubRock allows hundreds of people to discover, watch and share (mostly) originally-created videos.
 										SubRock provides a forum for people to connect, inform, and inspire others across the globe and acts as a distribution platform for original content creators. 
-										<br>SubRock is a fork of SubRocks, which shut down due to bhief getting a girlfriend.<br><br>
+										<!-- bluey2000k here, the girlfriend HAS NOTHING TO DO WITH THE SHUTDOWN, bhief only mentioned the girlfriend
+										because he wanted to tell people he ""has"" a life. -->
+										<br>SubRock is a fork of SubRocks, which shut down due to bhief cazinga getting tired of his community.<br><br>
 										The SubRock staff team hopes you enjoy your time on this small site.
 									</p>
                                 </div>

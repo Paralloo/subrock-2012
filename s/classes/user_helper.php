@@ -1,7 +1,7 @@
 <?php
 
 /**
-* @Auther: bhief
+* @Author: bhief
 * @Version: 1.0
 * @Added Base
 *
@@ -68,8 +68,9 @@ class user_helper {
         return $stmt->rowCount() === 1;
     }
 
+	// originally 10 mins, changed to 5.
     function if_upload_cooldown($user) {
-        $stmt = $this->__db->prepare("SELECT * FROM users WHERE username = :username AND upload_cooldown >= NOW() - INTERVAL 10 MINUTE");
+        $stmt = $this->__db->prepare("SELECT * FROM users WHERE username = :username AND upload_cooldown >= NOW() - INTERVAL 5 MINUTE");
         $stmt->bindParam(":username", $user);
         $stmt->execute();
         
