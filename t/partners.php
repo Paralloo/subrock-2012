@@ -164,6 +164,7 @@
                                             <li>Discord role</li>
                                             <li>Faster support by staff</li>
                                             <li>Emblem on your profile</li>
+											<li>Custom button on Watch pages</li>
                                         </ul>
                                     </p><br><br>
                                 </div>
