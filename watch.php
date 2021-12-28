@@ -1204,11 +1204,28 @@ while ($video = $stmt->fetch(PDO::FETCH_ASSOC))
     $video['title'] = htmlspecialchars($video['title']);
     $video['description'] = $__video_h->shorten_description($video['description'], 50);
 ?>
-												<li class="video-list-item"><a href="/watch?v=<?php echo $video['rid']; ?>" class="related-video yt-uix-contextlink  yt-uix-sessionlink" data-sessionlink="ved=CAIQzRooAA%3D%3D&amp;<?php echo htmlspecialchars($_video['author']); ?>&amp;feature=relmfu"><span class="ux-thumb-wrap contains-addto "><span class="video-thumb ux-thumb yt-thumb-default-120 "><span class="yt-thumb-clip"><span class="yt-thumb-clip-inner"><img src="//s.ytimg.com/yt/img/pixel-vfl3z5WfW.gif" alt="<?php echo $video['title']; ?>" onerror=";this.src='/dynamic/thumbs/default.jpg';" data-thumb="/dynamic/thumbs/<?php echo $video['thumbnail']; ?>" width="120"><span class="vertical-align"></span></span></span></span><span class="video-time"><?php echo $video['duration']; ?></span>
-													<button onclick=";return false;" title="Watch Later" type="button" class="addto-button video-actions addto-watch-later-button-sign-in yt-uix-button yt-uix-button-default yt-uix-button-short yt-uix-tooltip" data-button-menu-id="shared-addto-watch-later-login" data-video-ids="gyAaIKF6tSQ" role="button"><span class="yt-uix-button-content">  <img src="//s.ytimg.com/yt/img/pixel-vfl3z5WfW.gif" alt="Watch Later">
-													</span><img class="yt-uix-button-arrow" src="//s.ytimg.com/yt/img/pixel-vfl3z5WfW.gif" alt=""></button>
-													</span><span dir="ltr" class="title" title="<?php echo $video['title']; ?>"><?php echo $video['title']; ?></span><span class="stat attribution">by <span class="yt-user-name " dir="ltr"><?php echo htmlspecialchars($video['author']); ?></span></span><span class="stat view-count"><?php echo $video['views']; ?> views</span></a>
-												</li>
+<li class="video-list-item ">
+  <a href="/watch?v=<?php echo $video['rid']; ?>" class="video-list-item-link ">
+    <span class="ux-thumb-wrap contains-addto ">
+      <span class="video-thumb ux-thumb-110 ">
+        <span class="clip">
+          <img src="/dynamic/thumbs/<?php echo $video['thumbnail']; ?>" alt="Thumbnail" data-thumb="/dynamic/thumbs/<?php echo $video['thumbnail']; ?>" data-group-key="thumb-group-2">
+        </span>
+      </span>
+      <span class="video-time"><?php echo $video['duration']; ?></span>
+      <button type="button" class="addto-button short video-actions yt-uix-button yt-uix-button-short" onclick=";return false;" data-button-menu-action="yt.www.lists.addto.toggleMenu" data-button-menu-id="shared-addto-menu" data-video-ids="2hRcLan1TzU" data-feature="thumbnail" role="button">
+        <img class="yt-uix-button-icon yt-uix-button-icon-addto" src="//web.archive.org/web/20111111023534im_/http://s.ytimg.com/yt/img/pixel-vfl3z5WfW.gif" alt="">
+        <span class="yt-uix-button-content">
+          <span class="addto-label">Add to</span>
+        </span>
+        <img class="yt-uix-button-arrow" src="//web.archive.org/web/20111111023534im_/http://s.ytimg.com/yt/img/pixel-vfl3z5WfW.gif" alt="">
+      </button>
+    </span>
+    <span dir="ltr" class="title" title="<?php echo $video['title']; ?>"><?php echo $video['title']; ?></span>
+    <span class="stat">by <?php echo htmlspecialchars($video['author']); ?></span>
+    <span class="stat view-count"><?php echo $video['views']; ?> views </span>
+  </a>
+</li>
 												<?php
 } ?>
 											</ul>

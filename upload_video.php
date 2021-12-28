@@ -28,7 +28,8 @@
         </script>
         <link id="www-core-css" rel="stylesheet" href="/yt/cssbin/www-core-vfluMRDnk.css">
         <link rel="stylesheet" href="/yt/cssbin/www-guide-vflx0V5Tq.css">
-        <link rel="stylesheet" href="/yt/cssbin/www-extra.css">
+		<link rel="stylesheet" href="/yt/cssbin/www-extra.css">
+        <link rel="stylesheet" href="/yt/cssbin/www-upload-new-vfl177908.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script>
             if (window.yt.timing) {yt.timing.tick("ct");}    
@@ -55,21 +56,19 @@
 						</div></div></div>
 					<?php } ?>
 
-                    <div class="upload-div-top">
-                        Upload video file
-                    </div>
-                    <div class="upload-div-base">
+					<h1 class="header">
+					Video File Upload
+								</h1>
+                    <div class="upload-item-container upload-outer-box">
                         <div class="progressbar">
                             Your video is being uploaded... <span class="timeRemaining"></span><br>
                             <div class="barbg">
                                 <div class="bar"></div>
                             </div>
                         </div>
-                        <div class="www-upload-left">
-                            <center id="initial-upload">
-                                <img src="/yt/imgbin/upload_button.png" onclick="$('#video-file').click();" style="width: 139px;cursor:pointer;"><br><br>
-                                <button class="yt-uix-button yt-uix-button-default" onclick="$('#video-file').click();">
-                                    Select files from your computer
+                            <center id="starting-box" class="starting-box upload-inner-box">
+                                <button class="yt-uix-button yt-uix-button-urgent" onclick="$('#video-file').click();">
+                                    Upload video
                                 </button>
                             </center>
                             <form enctype="multipart/form-data" id="upload_form" action="/d/upload_video" method="post">
@@ -82,27 +81,15 @@
                                 Thumbnail selections will appear when the video has finished processing.<br><br>
                                 <input type="submit" value="Upload Video" class="yt-uix-button yt-uix-button-default">
                             </div>
-                        </div>
-                        <div class="www-upload-right">
-                            <div class="upload-initial-right">
-                                <h1>More ways to upload and create</h1><br> 
-                                <img src="/s/img/upload_multiple.png" style="vertical-align: top;">
-                                <span style="display: inline-block;">
-                                    <h4>Uploading high quality videos</h4>
-                                    <span class="small-text">
-                                        SubRock supports up to 480p with pristine bitrate.<br>
-                                        You can upload videos that are up to an hour long.
-                                    </span>
-                                </span><br><br>
-                                <img src="/s/img/record_from_webcam.png" style="vertical-align: top;">
-                                <span style="display: inline-block;">
-                                    <h4>Recording from webcam</h4>
-                                    <span class="small-text">
-                                        SubRock <b>will</b> support recording from webcam.<br>
-                                        This feature might be added. Only time will tell.
-                                    </span>
-                                </span><br><br>
-                            </div>
+						<div id="about-uploading-box">
+									<h4>Videos can be...</h4>
+									<ul class="constraints">
+										<li class="constraint">High Definition</li>
+											<li class="constraint">Up to 2 GB in size.</li>
+											<li class="constraint">Up to 10 minutes in length.</li>
+										<li class="constraint">A wide variety of formats</li>
+									</ul>
+								</div>
                             <div class="upload-stage-2-right" style="display: none;">
                                 <b>Category</b> <br>
                                 <select style="margin-top:5px;" name="category" class="yt-uix-button yt-uix-button-default">
@@ -146,7 +133,6 @@
                                 <input name="privacy" type="text" style="visibility: hidden;">
                                 <input id="video-file" type="file" name="video_file" style="visibility: hidden;">
                             </div>
-                        </div>
                         </form>
                         <script>
                             $("#video-file").click(function(){
@@ -155,7 +141,7 @@
 
                             $("#video-file").change(function(){
                                 $("#video-title").val($(this).val().replace(/^.*\\/, ""));
-                                $("#initial-upload").fadeOut(20);
+                                $("#starting-box").fadeOut(20);
                                 $(".upload-initial-right").fadeOut(20);
                                 $(".upload-stage-2-right").fadeIn(300);
                                 $(".upload-stage-2").fadeIn(300);

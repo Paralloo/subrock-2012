@@ -19,47 +19,37 @@
 	<a id="logo-container" href="/" title="SubRocks home">
 	<img id="logo" src="//s.ytimg.com/yt/img/pixel-vfl3z5WfW.gif" alt="SubRocks home">
 	</a>
-	<?php if(!isset($_SESSION['siteusername'])) { ?>
-	<div id="yt-masthead-signin">
-		<div id="masthead-user-display"><span id="masthead-user-wrapper"><button href="/sign_in" type="button" id="masthead-user-button" onclick=";window.location.href=this.getAttribute('href');return false;" class=" yt-uix-button yt-uix-button-text" role="button"><span class="yt-uix-button-content">  <span id="masthead-user-image">
-			<span class="clip">
-			<span class="clip-center">
-				<img src="//s.ytimg.com/yt/img/no_videos_140-vfl5AhOQY.png" alt="">
-				<span class="vertical-center"></span>
-			</span>
-			</span>
-		</span>
-		<span class="masthead-user-username">Sign In</span>
-		</span></button></span></div>
+	<div id="masthead-sections">
+      <a href="videos">Browse    </a><a href="upload_video" class="split end ">Upload</a><span class="valign-fix"></span>
+      <?php if(!isset($_SESSION['siteusername'])) { ?>
+	  <a class="start" href="sign_up">Create Account</a>  <a class="end" href="sign_in">Sign In</a>
+	  <?php } else { ?>
+	  <button type="button" class="flip yt-uix-button yt-uix-button-text" onclick=";return false;"><span class="yt-uix-button-content"><?php echo htmlspecialchars($_SESSION['siteusername']); ?></span> <img class="yt-uix-button-arrow" src="https://web.archive.org/web/20100725215727im_/http://s.ytimg.com/yt/img/pixel-vfl73.gif" alt=""><div style="left: 254.984px; top: 107.125px; min-width: 104px; display: none;" class="yt-uix-button-menu yt-uix-button-menu-text hid">	<table>
+		<tbody><tr>
+			<td><a class="yt-uix-button-menu-item" href="/user/<?php echo htmlspecialchars($_SESSION['siteusername']); ?>">My Channel</a></td>
+			<td><a class="yt-uix-button-menu-item" href="my_subscriptions">Subscriptions</a></td>
+		</tr>
+		<tr>
+			<td><a class="yt-uix-button-menu-item" href="/inbox/">Inbox</a></td>
+			<td><a class="yt-uix-button-menu-item" href="my_videos">My Videos</a></td>
+		</tr>
+		<tr>
+			<td><a class="yt-uix-button-menu-item" href="/account">Account</a></td>
+			<td><a class="yt-uix-button-menu-item" href="/my_favorites">Favorites</a></td>
+		</tr>
+	</tbody></table>
+</div></button>
+<a class="end" href="#" onclick="document.logoutForm.submit(); return false;">Sign Out</a>
+	  <?php } ?>
 	</div>
-	<?php } else { ?>
-			<div id="masthead-user-bar-container">
-				<div id="masthead-user-bar">
-					<div id="masthead-user">
-						<span id="masthead-user-expander" class="yt-uix-expander" data-expander-action="yt.www.masthead.toggleExpandedMasthead"><span id="masthead-user-wrapper" class="yt-uix-expander-head yt-rounded" tabindex="0"><button type="button" id="masthead-user-button" onclick=";return false;" class="yt-uix-button yt-uix-button-text yt-uix-button-toggled" data-button-toggle="true" role="button"><span class="yt-uix-button-content">  <span id="masthead-user-image">
-						<span class="clip">
-							<span class="clip-center">
-								<img src="/dynamic/pfp/<?php echo $__user_h->fetch_pfp($_SESSION['siteusername']); ?>" alt="<?php echo htmlspecialchars($_SESSION['siteusername']); ?>">
-								<span class="vertical-center"></span>
-							</span>
-						</span>
-						</span>
-						<span class="masthead-user-username"><?php echo htmlspecialchars($_SESSION['siteusername']); ?></span>
-							<span class="yt-uix-expander-arrow"></span>
-						</span></button></span></span>
-					</div>
-				</div>
-    	</div>
-	<?php } ?>
 	<div id="masthead-search-bar-container">
 		<div id="masthead-search-bar">
-			<div id="masthead-nav"><a href="/videos?feature=mh">Browse</a><span class="masthead-link-separator">|</span><a id="masthead-upload-link" class="" data-upsell="upload" href="/upload_video">Upload</a></div>
 			<form id="masthead-search" class="search-form consolidated-form" action="/results" onsubmit="if (_gel('masthead-search-term').value == '') return false;">
 				<button class="search-btn-compontent search-button yt-uix-button yt-uix-button-default" onclick="if (_gel('masthead-search-term').value == '') return false; _gel('masthead-search').submit(); return false;;return true;" type="submit" id="search-btn" dir="ltr" tabindex="2" role="button"><span class="yt-uix-button-content">Search </span></button>
 				<div id="masthead-search-terms" class="masthead-search-terms-border" dir="ltr"><label><input id="masthead-search-term" autocomplete="off" class="search-term" name="search_query" value="" type="text" tabindex="1" onkeyup="goog.i18n.bidi.setDirAttribute(event,this)" title="Search"></label></div>
 			</form>
 		</div>
-	</div></div>
+	</div></div></div>
 	<div class="alerts-2012">
 	
 	</div>
