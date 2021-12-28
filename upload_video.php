@@ -90,7 +90,7 @@
                                 <span style="display: inline-block;">
                                     <h4>Uploading high quality videos</h4>
                                     <span class="small-text">
-                                        SubRock suports up to 480p with pristine bitrate.<br>
+                                        SubRock supports up to 480p with pristine bitrate.<br>
                                         You can upload videos that are up to an hour long.
                                     </span>
                                 </span><br><br>
