@@ -4,3 +4,4 @@ composer.json
 composer.json.dist
 composer.lock
 dynamic/
+s/classes/config.ing.php
