@@ -753,7 +753,7 @@ else
 													<p id="eow-category"><a href="/videos?c=<?php echo htmlspecialchars($_video['category']); ?>"><?php echo htmlspecialchars($_video['category']); ?></a></p>
 													<h4>License:</h4>
 													<p id="eow-reuse">
-														None
+														Standard SubRock License
 													</p>
 												</div>
 											</div>
