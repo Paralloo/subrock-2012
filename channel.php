@@ -278,7 +278,7 @@
 
 												<?php } ?>
 												<?php if($__user_h->if_partner($_user['username'])) { ?>
-													<img style="width: 29px;vertical-align: middle;margin-left: 10px;" title="This user is a SubRock partner" src="/yt/imgbin/RenderedImage.png">
+													<img style="width: 16px;vertical-align: middle;margin-left: 10px;" class="yt-uix-tooltip" data-tooltip-text="This user is a SubRock partner" title="This user is a SubRock partner" src="/yt/imgbin/RenderedImage.png">
 												<?php } ?>
 											</div>
 											<div class="upper-right-section">
