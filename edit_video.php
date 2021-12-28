@@ -171,6 +171,7 @@
                                             <b>Custom Thumbnail</b> <br><input class="upload-input" id="thumbnail" type="file" name="thumbnail"><br><br>
                                             <br><br>
                                             <input type="submit" value="Apply Changes" class="yt-uix-button yt-uix-button-default">
+											<a class="yt-uix-button yt-uix-button-destructive" href="/get/delete_video?id=<?php echo $_video['rid']; ?>">Delete Video</a>
                                         </div>
                                     </div>
                                     <div class="www-upload-right">

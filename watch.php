@@ -1,42 +1,48 @@
-<?php require_once($_SERVER['DOCUMENT_ROOT'] . "/s/classes/config.inc.php"); ?>
-<?php require_once($_SERVER['DOCUMENT_ROOT'] . "/s/classes/db_helper.php"); ?>
-<?php require_once($_SERVER['DOCUMENT_ROOT'] . "/s/classes/time_manip.php"); ?>
-<?php require_once($_SERVER['DOCUMENT_ROOT'] . "/s/classes/user_helper.php"); ?>
-<?php require_once($_SERVER['DOCUMENT_ROOT'] . "/s/classes/video_helper.php"); ?>
-<?php require_once($_SERVER['DOCUMENT_ROOT'] . "/s/classes/user_update.php"); ?>
-<?php require_once($_SERVER['DOCUMENT_ROOT'] . "/s/classes/user_insert.php"); ?>
+<?php require_once ($_SERVER['DOCUMENT_ROOT'] . "/s/classes/config.inc.php"); ?>
+<?php require_once ($_SERVER['DOCUMENT_ROOT'] . "/s/classes/db_helper.php"); ?>
+<?php require_once ($_SERVER['DOCUMENT_ROOT'] . "/s/classes/time_manip.php"); ?>
+<?php require_once ($_SERVER['DOCUMENT_ROOT'] . "/s/classes/user_helper.php"); ?>
+<?php require_once ($_SERVER['DOCUMENT_ROOT'] . "/s/classes/video_helper.php"); ?>
+<?php require_once ($_SERVER['DOCUMENT_ROOT'] . "/s/classes/user_update.php"); ?>
+<?php require_once ($_SERVER['DOCUMENT_ROOT'] . "/s/classes/user_insert.php"); ?>
 <?php $__video_h = new video_helper($__db); ?>
 <?php $__user_h = new user_helper($__db); ?>
 <?php $__user_i = new user_insert($__db); ?>
 <?php $__user_u = new user_update($__db); ?>
 <?php $__db_h = new db_helper(); ?>
 <?php $__time_h = new time_helper(); ?>
-<?php if(!$__video_h->video_exists($_GET['v'])) { header("Location: /?error=This video doesn't exist!"); } ?>
+<?php if (!$__video_h->video_exists($_GET['v']))
+{
+    header("Location: /?error=This video doesn't exist!");
+} ?>
 <?php $_video = $__video_h->fetch_video_rid($_GET['v']); ?>
 <?php $_video['comments'] = $__video_h->get_comments_from_video($_video['rid']); ?>
 <?php
-	if($_video['visibility'] == "v" && @$_SESSION['siteusername'] != $_video['author'])
-		header("Location: /");
+if ($_video['visibility'] == "v" && @$_SESSION['siteusername'] != $_video['author']) header("Location: /");
 
-	$__video_h->check_view($_GET['v'], @$_SERVER["HTTP_CF_CONNECTING_IP"]);
+$__video_h->check_view($_GET['v'], @$_SERVER["HTTP_CF_CONNECTING_IP"]);
 
-	$_SESSION['current_video'] = $_video['rid'];
+$_SESSION['current_video'] = $_video['rid'];
 
-	/* 
+/*
 	PREPARE EMBEDS CLASS -- function(string $page_title, string $page_description...) 
 	Returns a list of arrays for compatibility purposes & but downside is ugly for loop codes 
 	Work on this tomorrow or some shit idk lol
-	*/
+*/
 
-	/* 
+/*
 	USE THE GOD DAMN __CONFIG MORE -- idiot
 	Work on this tomorrow or some shit
-	*/
+*/
 
-	$__server->page_embeds->page_title = htmlspecialchars($_video['title']);
-	$__server->page_embeds->page_description = htmlspecialchars($_video['description']);
-	$__server->page_embeds->page_image = "/dynamic/thumbs/" . $_video['thumbnail'];
-	$__server->page_embeds->page_url = "https://www.subrock.tk/watch?v=" . htmlspecialchars($_video['rid']);
+$__server
+    ->page_embeds->page_title = htmlspecialchars($_video['title']);
+$__server
+    ->page_embeds->page_description = htmlspecialchars($_video['description']);
+$__server
+    ->page_embeds->page_image = "/dynamic/thumbs/" . $_video['thumbnail'];
+$__server
+    ->page_embeds->page_url = "https://www.subrock.tk/watch?v=" . htmlspecialchars($_video['rid']);
 ?>
 <!DOCTYPE html>
 <html>
@@ -45,11 +51,16 @@
          var yt = yt || {};yt.timing = yt.timing || {};yt.timing.tick = function(label, opt_time) {var timer = yt.timing['timer'] || {};if(opt_time) {timer[label] = opt_time;}else {timer[label] = new Date().getTime();}yt.timing['timer'] = timer;};yt.timing.info = function(label, value) {var info_args = yt.timing['info_args'] || {};info_args[label] = value;yt.timing['info_args'] = info_args;};yt.timing.info('e', "907722,906062,910102,927104,922401,920704,912806,927201,913546,913556,925109,919003,920201,912706,900816");yt.timing.wff = true;yt.timing.info('an', "");if (document.webkitVisibilityState == 'prerender') {document.addEventListener('webkitvisibilitychange', function() {yt.timing.tick('start');}, false);}yt.timing.tick('start');yt.timing.info('li','0');try {yt.timing['srt'] = window.gtbExternal && window.gtbExternal.pageT() ||window.external && window.external.pageT;} catch(e) {}if (window.chrome && window.chrome.csi) {yt.timing['srt'] = Math.floor(window.chrome.csi().pageT);}if (window.msPerformance && window.msPerformance.timing) {yt.timing['srt'] = window.msPerformance.timing.responseStart - window.msPerformance.timing.navigationStart;}    
       </script>
       <script>var yt = yt || {};yt.preload = {};yt.preload.counter_ = 0;yt.preload.start = function(src) {var img = new Image();var counter = ++yt.preload.counter_;yt.preload[counter] = img;img.onload = img.onerror = function () {delete yt.preload[counter];};img.src = src;img = null;};yt.preload.start("\/\/o-o---preferred---sn-o097zne7---v18---lscache1.c.youtube.com\/crossdomain.xml");yt.preload.start("\/\/o-o---preferred---sn-o097zne7---v18---lscache1.c.youtube.com\/generate_204?ip=207.241.237.166\u0026upn=sWh0pzcodo0\u0026sparams=algorithm%2Cburst%2Ccp%2Cfactor%2Cgcr%2Cid%2Cip%2Cipbits%2Citag%2Csource%2Cupn%2Cexpire\u0026fexp=907722%2C906062%2C910102%2C927104%2C922401%2C920704%2C912806%2C927201%2C913546%2C913556%2C925109%2C919003%2C920201%2C912706%2C900816\u0026mt=1349916311\u0026key=yt1\u0026algorithm=throttle-factor\u0026burst=40\u0026ipbits=8\u0026itag=34\u0026sver=3\u0026signature=C397DCB00566E0FBB1551675B6108A4158C34557.CB3777882F05D65158C043C258FF8D4EBA90FA50\u0026mv=m\u0026source=youtube\u0026ms=au\u0026gcr=us\u0026expire=1349937946\u0026factor=1.25\u0026cp=U0hTTllOVV9JUENOM19RSFlKOmVLUWdkTXRmS0dX\u0026id=a078394896111c0d");</script>
-      <title><?php echo $__server->page_embeds->page_title; ?></title>
-      <meta property="og:title" content="<?php echo $__server->page_embeds->page_title; ?>" />
-		<meta property="og:url" content="<?php echo $__server->page_embeds->page_url; ?>" />
-		<meta property="og:description" content="<?php echo $__server->page_embeds->page_description; ?>" />
-		<meta property="og:image" content="<?php echo $__server->page_embeds->page_image; ?>" />
+      <title><?php echo $__server
+    ->page_embeds->page_title; ?></title>
+      <meta property="og:title" content="<?php echo $__server
+    ->page_embeds->page_title; ?>" />
+		<meta property="og:url" content="<?php echo $__server
+    ->page_embeds->page_url; ?>" />
+		<meta property="og:description" content="<?php echo $__server
+    ->page_embeds->page_description; ?>" />
+		<meta property="og:image" content="<?php echo $__server
+    ->page_embeds->page_image; ?>" />
 		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
       <meta name=attribution content=youtube_multi/>
       <link id="www-core-css" rel="stylesheet" href="/yt/cssbin/www-core-vfluMRDnk.css">
@@ -66,29 +77,32 @@
          if (window.yt.timing) {yt.timing.tick("ct");}    
       </script>
 		<?php
-			$_video['dislikes'] =  $__video_h->get_video_stars_level($_video['rid'], 1);
-			$_video['dislikes'] += $__video_h->get_video_stars_level($_video['rid'], 2);
+$_video['dislikes'] = $__video_h->get_video_stars_level($_video['rid'], 1);
+$_video['dislikes'] += $__video_h->get_video_stars_level($_video['rid'], 2);
 
-			$_video['likes'] =     $__video_h->get_video_stars_level($_video['rid'], 4);
-			$_video['likes'] +=    $__video_h->get_video_stars_level($_video['rid'], 5);
+$_video['likes'] = $__video_h->get_video_stars_level($_video['rid'], 4);
+$_video['likes'] += $__video_h->get_video_stars_level($_video['rid'], 5);
 
-			$_video['dislikes'] += $__video_h->get_video_likes($_video['rid'], false);
-			$_video['likes'] += $__video_h->get_video_likes($_video['rid'], true);
+$_video['dislikes'] += $__video_h->get_video_likes($_video['rid'], false);
+$_video['likes'] += $__video_h->get_video_likes($_video['rid'], true);
 
-			if($_video['likes'] == 0 && $_video['dislikes'] == 0) {
-				$_video['likeswidth'] = 0;
-				$_video['dislikeswidth'] = 0;
-			} else {
-				$_video['likeswidth'] = $_video['likes'] / ($_video['likes'] + $_video['dislikes']) * 100;
-				$_video['dislikeswidth'] = 100 - $_video['likeswidth'];
-			}
+if ($_video['likes'] == 0 && $_video['dislikes'] == 0)
+{
+    $_video['likeswidth'] = 0;
+    $_video['dislikeswidth'] = 0;
+}
+else
+{
+    $_video['likeswidth'] = $_video['likes'] / ($_video['likes'] + $_video['dislikes']) * 100;
+    $_video['dislikeswidth'] = 100 - $_video['likeswidth'];
+}
 
-			$_video['liked'] = $__video_h->if_liked(@$_SESSION['siteusername'], $_video['rid'], true);
-			$_video['disliked'] = $__video_h->if_liked(@$_SESSION['siteusername'], $_video['rid'], false);
-			$_video['author_videos'] = $__video_h->fetch_user_videos($_video['author']);
-			$_video['subscribed'] = $__user_h->if_subscribed(@$_SESSION['siteusername'], $_video['author']);
-			$_video['favorited'] = $__video_h->if_favorited(@$_SESSION['siteusername'], $_video['rid']);
-		?>
+$_video['liked'] = $__video_h->if_liked(@$_SESSION['siteusername'], $_video['rid'], true);
+$_video['disliked'] = $__video_h->if_liked(@$_SESSION['siteusername'], $_video['rid'], false);
+$_video['author_videos'] = $__video_h->fetch_user_videos($_video['author']);
+$_video['subscribed'] = $__user_h->if_subscribed(@$_SESSION['siteusername'], $_video['author']);
+$_video['favorited'] = $__video_h->if_favorited(@$_SESSION['siteusername'], $_video['rid']);
+?>
 	</head>
 	<body id="" class="date-20120927 en_US ltr   ytg-old-clearfix guide-feed-v2 gecko gecko-15" dir="ltr">
 		<form name="logoutForm" method="POST" action="/logout">
@@ -96,7 +110,7 @@
 		</form>
 		<!-- begin page -->
 		<div id="page" class="  watch  ">
-			<div id="masthead-container"><?php require($_SERVER['DOCUMENT_ROOT'] . "/s/mod/header.php") ?></div>
+			<div id="masthead-container"><?php require ($_SERVER['DOCUMENT_ROOT'] . "/s/mod/header.php") ?></div>
 			<div id="content-container">
 				<!-- begin content -->
 				<div id="content">
@@ -113,26 +127,80 @@
 									</div>
 									<div id="instream_google_companion_ad_div"></div>
 								</div>
-								<?php if(@$_SESSION['siteusername'] == $_video['author']) { ?>
+								<?php if (@$_SESSION['siteusername'] == $_video['author'])
+{ ?>
+								<div id="watch-headline-container">
 									<div id="watch-owner-container">
-										<div id="masthead-subnav" class="yt-nav yt-nav-dark ">
-											<ul class="yt-nav-aside">
+												<div id="masthead-subnav" class="yt-nav yt-nav-dark ">
+										<ul class="yt-nav-aside">
+											  <li>
+										
+
+
+									<a href="https://www.youtube.com/analytics#fi=v-9eTkCPkX6mc" class="yt-uix-button yt-uix-sessionlink yt-uix-button-subnav  yt-uix-button-dark" data-sessionlink="ei=CMCA1_3robMCFSrJRAodqnnxKQ%3D%3D"><span class="yt-uix-button-content">Analytics
+									</span></a>
+									  </li>
+
+										<li>
+										
+
+
+									<a href="/my_videos" class="yt-uix-button yt-uix-sessionlink yt-uix-button-subnav  yt-uix-button-dark" data-sessionlink="ei=CMCA1_3robMCFSrJRAodqnnxKQ%3D%3D"><span class="yt-uix-button-content">Video Manager</span></a>
+									  </li>
+
+
+										</ul>
+
+										<ul>
+										  <li>
+
+											
+
+
+									<a href="/edit_video?id=<?php echo $_video['rid']; ?>" class="yt-uix-button yt-uix-sessionlink yt-uix-button-subnav yt-uix-button-dark" data-sessionlink="ei=CMCA1_3robMCFSrJRAodqnnxKQ%3D%3D"><span class="yt-uix-button-content">Edit</span></a>
+										  </li>
+
 												<li>
-													<a href="/my_videos" class="yt-uix-button yt-uix-sessionlink yt-uix-button-subnav  yt-uix-button-dark" data-sessionlink="ei=CMCA1_3robMCFSrJRAodqnnxKQ%3D%3D"><span class="yt-uix-button-content">Video Manager</span></a>
-												</li>
-											</ul>
-											<ul>
+										
+
+
+									<a href="/enhance?v=<?php echo $_video['rid']; ?>" class="yt-uix-button yt-uix-sessionlink yt-uix-button-subnav  yt-uix-button-dark" data-sessionlink="ei=CMCA1_3robMCFSrJRAodqnnxKQ%3D%3D"><span class="yt-uix-button-content">Enhancements</span></a>
+									  </li>
+
 												<li>
-													<a href="/edit_video?id=<?php echo $_video['rid']; ?>" class="yt-uix-button yt-uix-sessionlink yt-uix-button-subnav yt-uix-button-dark" data-sessionlink="ei=CMCA1_3robMCFSrJRAodqnnxKQ%3D%3D"><span class="yt-uix-button-content">Edit</span></a>
-												</li>
-												<li>
-													<a href="/get/delete_video?id=<?php echo $_video['rid']; ?>" class="yt-uix-button yt-uix-sessionlink yt-uix-button-subnav  yt-uix-button-dark" data-sessionlink="ei=CMCA1_3robMCFSrJRAodqnnxKQ%3D%3D"><span class="yt-uix-button-content">Delete Video</span></a>
-												</li>
-											</ul>
-										</div>
-									</div><br>
-								<?php } ?>
-								<?php if($__user_h->if_admin(@$_SESSION['siteusername']) && @$_SESSION['siteusername'] != $_video['author']) { ?>
+										
+
+
+									<a href="/audio?v=<?php echo $_video['rid']; ?>" class="yt-uix-button yt-uix-sessionlink yt-uix-button-subnav  yt-uix-button-dark" data-sessionlink="ei=CMCA1_3robMCFSrJRAodqnnxKQ%3D%3D"><span class="yt-uix-button-content">Audio</span></a>
+									  </li>
+
+
+											  <li>
+										
+
+
+									<a href="/my_videos_annotate?v=<?php echo $_video['rid']; ?>" class="yt-uix-button yt-uix-sessionlink yt-uix-button-subnav  yt-uix-button-dark" data-sessionlink="ei=CMCA1_3robMCFSrJRAodqnnxKQ%3D%3D"><span class="yt-uix-button-content">Annotations</span></a>
+									  </li>
+
+
+										  
+
+
+										<li>
+										  <button type="button" class="yt-uix-button yt-uix-button-dark yt-uix-button-empty" onclick=";return false;" role="button" aria-pressed="false" aria-expanded="false" aria-haspopup="true" aria-activedescendant=""><img class="yt-uix-button-arrow" src="//s.ytimg.com/yts/img/pixel-vfl3z5WfW.gif" alt=""><ul class="yt-uix-button-menu yt-uix-button-menu-dark hid" role="menu" aria-haspopup="true" style="min-width: 28px; left: 636.375px; top: 98.0781px; display: none;"><li role="menuitem" id="aria-id-42038905421"><span href="/my_videos_timedtext?video_id=9eTkCPkX6mc" class=" yt-uix-button-menu-item" onclick=";window.location.href=this.getAttribute('href');return false;">Captions</span></li><li role="menuitem" id="aria-id-54340718499"><span href="/my_video_ad?v=9eTkCPkX6mc&amp;utm_source=youtube&amp;utm_campaign=yt_watch&amp;utm_medium=permanent&amp;utm_content=header_menu&amp;utm_term=dropdown" class=" yt-uix-button-menu-item" onclick=";window.location.href=this.getAttribute('href');return false;">Promote</span></li></ul></button>
+										</li>
+
+										</ul>
+									  </div>
+
+
+										  </div>
+								</div>
+								<?php
+} ?>
+								<?php if ($__user_h->if_admin(@$_SESSION['siteusername']) && @$_SESSION['siteusername'] != $_video['author'])
+{ ?>
+								<div id="watch-headline-container">
 									<div id="watch-owner-container">
 										<div id="masthead-subnav" class="yt-nav yt-nav-dark ">
 											<ul class="yt-nav-aside">
@@ -152,27 +220,30 @@
 												</li>
 											</ul>
 										</div>
-									</div><br>
+									</div>
+								</div>
 
 									<?php $_user = $__user_h->fetch_user_username($_video['author']); ?>
 									<?php
-										$stmt = $__db->prepare("SELECT ip, username FROM users WHERE ip = :ip");
-										$stmt->bindParam(":ip", $_user['ip']);
-										$stmt->execute();
-										$alts = $stmt->rowCount();
+    $stmt = $__db->prepare("SELECT ip, username FROM users WHERE ip = :ip");
+    $stmt->bindParam(":ip", $_user['ip']);
+    $stmt->execute();
+    $alts = $stmt->rowCount();
 
-										if($alts != 0) { echo "<span style='font-size:11px;color:grey;'>Alts will pop up below here...</span><br>"; }
+    if ($alts != 0)
+    {
+        echo "<span style='font-size:11px;color:grey;'>Alts will pop up below here...</span><br>";
+    }
 
-										while($username = $stmt->fetch(PDO::FETCH_ASSOC)) { 
-											if($username['username'] != $_video['author'] && $username['ip'] != "0.0.0.0")
-												echo "
-												  <a style='font-size:10px;' href='/user/" .  htmlspecialchars($username['username']) . "'>" . 
-													htmlspecialchars($username['username']) 
-												. "</a><br>";
-										}
-									?>
+    while ($username = $stmt->fetch(PDO::FETCH_ASSOC))
+    {
+        if ($username['username'] != $_video['author'] && $username['ip'] != "0.0.0.0") echo "
+												  <a style='font-size:10px;' href='/user/" . htmlspecialchars($username['username']) . "'>" . htmlspecialchars($username['username']) . "</a><br>";
+    }
+?>
 									<hr>
-								<?php } ?>
+								<?php
+} ?>
 								<h1 id="watch-headline-title">
 									<span id="eow-title" class="long-title " dir="ltr" title="<?php echo htmlspecialchars($_video['title']); ?>">
 									<?php echo htmlspecialchars($_video['title']); ?>
@@ -182,6 +253,18 @@
 									<button style="margin-right: -5px;" href="/user/<?php echo htmlspecialchars($_video['author']); ?>" type="button" class="start yt-uix-button yt-uix-button-default" onclick=";window.location.href=this.getAttribute('href');return false;" role="button">
 										<span class="yt-uix-button-content"><?php echo htmlspecialchars($_video['author']); ?></span>
 									</button>
+									<?php if (@$_SESSION['siteusername'] == $_video['author'])
+{ ?>
+									<div class="yt-subscription-button-hovercard yt-uix-hovercard" data-card-class="watch-subscription-card"><span class="yt-uix-button-context-light yt-uix-button-subscription-container">  <button disabled="True" onclick=";return false;" title="No need to subscribe to yourself!" type="button" class="yt-subscription-button end yt-uix-button yt-uix-button-default yt-uix-tooltip" role="button" data-tooltip-text="No need to subscribe to yourself!"><span class="yt-uix-button-content">Subscribe </span></button>
+									<span class="yt-subscription-button-disabled-mask"></span></span><div class="yt-uix-hovercard-content hid">  <p class="loading-spinner">
+										<img src="//s.ytimg.com/yts/img/pixel-vfl3z5WfW.gif" alt="">
+									Loading...
+									  </p>
+									</div></div>
+									<?php
+}
+else
+{ ?>
 									<div class="yt-subscription-button-hovercard yt-uix-hovercard">
 										<span class="yt-uix-button-context-light yt-uix-button-subscription-container">
 										<button 
@@ -189,7 +272,10 @@
 											title="" 
 											id="subscribe-button"
 											type="button" 
-											class="<?php if($_video['subscribed']) { echo "subscribed "; } ?>yt-subscription-button  yt-uix-button yt-uix-button-subscription yt-uix-tooltip" 
+											class="<?php if ($_video['subscribed'])
+    {
+        echo "subscribed ";
+    } ?>yt-subscription-button  yt-uix-button yt-uix-button-subscription yt-uix-tooltip" 
 											role="button">
 											<span class="yt-uix-button-icon-wrapper">
 												<img class="yt-uix-button-icon yt-uix-button-icon-subscribe" src="//s.ytimg.com/yt/img/pixel-vfl3z5WfW.gif" alt="">
@@ -209,6 +295,8 @@
 											</p>
 										</div>
 									</div>
+									<?php
+} ?>
 									<button onclick="_toggleclass(this,'yt-uix-expander-collapsed');return false;" type="button" id="watch-mfu-button" class="yt-uix-expander-collapsed yt-uix-button yt-uix-button-default" data-button-toggle="true" data-video-user-id="<?php echo htmlspecialchars($_video['author']); ?>" data-button-menu-id="some-nonexistent-menu" data-video-id="<?php echo htmlspecialchars($_video['rid']); ?>" data-button-action="yt.www.watch.watch5.handleToggleMoreFromUser" role="button"><span class="yt-uix-button-content"><?php echo $_video['author_videos']; ?> videos </span><img class="yt-uix-button-arrow" src="//s.ytimg.com/yt/img/pixel-vfl3z5WfW.gif" alt=""></button>
 								</div>
 								<div id="watch-more-from-user" class="collapsed">
@@ -247,7 +335,8 @@ if (window.yt.timing) {yt.timing.tick("bf");}    </script>
 						<div id="watch-main-container">
 							<div id="watch-main">
 								<div id="watch-panel">
-									<?php if($_video['featured'] == "v") { ?>
+									<?php if ($_video['featured'] == "v")
+{ ?>
 										<div id="masthead_child_div"><div class="yt-alert yt-alert-default yt-alert-warn">  <div class="yt-alert-icon">
 											<img src="//s.ytimg.com/yt/img/pixel-vfl3z5WfW.gif" class="icon master-sprite" alt="Alert icon">
 										</div>
@@ -256,9 +345,11 @@ if (window.yt.timing) {yt.timing.tick("bf");}    </script>
 												This video is featured. View more featured videos by SubRock on the front page.
 											</div>
 										</div></div></div>
-									<?php }  ?>
+									<?php
+} ?>
 
-	  								<?php if($_video['visibility'] == "u") { ?>
+	  								<?php if ($_video['visibility'] == "u")
+{ ?>
 										<div id="masthead_child_div"><div class="yt-alert yt-alert-default yt-alert-warn">  <div class="yt-alert-icon">
 											<img src="//s.ytimg.com/yt/img/pixel-vfl3z5WfW.gif" class="icon master-sprite" alt="Alert icon">
 										</div>
@@ -267,7 +358,10 @@ if (window.yt.timing) {yt.timing.tick("bf");}    </script>
 												This video is unlisted. Only people who have the link can view this video.
 											</div>
 										</div></div></div>
-									<?php } else if($_video['visibility'] == "v") { ?>
+									<?php
+}
+else if ($_video['visibility'] == "v")
+{ ?>
 										<div id="masthead_child_div"><div class="yt-alert yt-alert-default yt-alert-error">  <div class="yt-alert-icon">
 											<img src="//s.ytimg.com/yt/img/pixel-vfl3z5WfW.gif" class="icon master-sprite" alt="Alert icon">
 										</div>
@@ -276,7 +370,19 @@ if (window.yt.timing) {yt.timing.tick("bf");}    </script>
 												This video is private. Only you can view this video.
 											</div>
 										</div></div></div>
-									<?php } ?>
+									<?php
+							} 
+							else if (@$_SESSION['siteusername'] == $_video['author']) { ?>
+							<div id="watch-privacy-contain">
+								  <div id="eow-privacy">
+									<div class="yt-alert yt-alert-default yt-alert-warn  " id="watch-video-notification-alert"><div class="yt-alert-buttons"></div><div class="yt-alert-content" role="alert">    <span class="yt-alert-vertical-trick"></span>
+								<div class="yt-alert-message">
+										This video is public.
+								</div>
+							</div></div>
+								  </div>
+								</div>
+							<?php } ?>
 
 									<div class="yt-alert yt-alert-default yt-alert-warn hid " id="flash10-promo-div">
 										<div class="yt-alert-icon">
@@ -301,7 +407,10 @@ if (window.yt.timing) {yt.timing.tick("bf");}    </script>
 											<button onclick=";window.location.href=this.getAttribute('href');return false;" href="/get/like_video?v=<?php echo $_video['rid']; ?>"
 											title="I like this" 
 											type="button" 
-											class="start <?php if($_video['liked']) { echo "liked "; } ?>yt-uix-tooltip-reverse  yt-uix-button yt-uix-button-default yt-uix-tooltip" 
+											class="start <?php if ($_video['liked'])
+{
+    echo "liked ";
+} ?>yt-uix-tooltip-reverse  yt-uix-button yt-uix-button-default yt-uix-tooltip" 
 											id="watch-like"  
 											href="/get/like_video?v=<?php echo $_video['rid']; ?>"
 											role="button"><span class="yt-uix-button-icon-wrapper">
@@ -315,7 +424,10 @@ if (window.yt.timing) {yt.timing.tick("bf");}    </script>
 											type="button" 
 											style="margin-left: -2px;"
 											href="/get/dislike_video?v=<?php echo $_video['rid']; ?>"
-											class="end yt-uix-tooltip-reverse <?php if($_video['disliked']) { echo "unliked "; } ?>  yt-uix-button yt-uix-button-default yt-uix-tooltip yt-uix-button-empty" 
+											class="end yt-uix-tooltip-reverse <?php if ($_video['disliked'])
+{
+    echo "unliked ";
+} ?>  yt-uix-button yt-uix-button-default yt-uix-tooltip yt-uix-button-empty" 
 											id="watch-unlike" 
 											role="button">
 												<span class="yt-uix-button-icon-wrapper">
@@ -335,7 +447,8 @@ if (window.yt.timing) {yt.timing.tick("bf");}    </script>
 												</div>
 											</div>
 											<div id="watch-actions-logged-out" class="watch-actions-panel hid">
-												<?php if(!isset($_SESSION['siteusername'])) { ?>
+												<?php if (!isset($_SESSION['siteusername']))
+{ ?>
 												<div class="yt-alert yt-alert-naked yt-alert-warn  ">
 													<div class="yt-alert-icon">
 														<img src="//s.ytimg.com/yt/img/pixel-vfl3z5WfW.gif" class="icon master-sprite" alt="Alert icon">
@@ -348,60 +461,89 @@ if (window.yt.timing) {yt.timing.tick("bf");}    </script>
 														</div>
 													</div>
 												</div>
-												<?php } else { ?>
+												<?php
+}
+else
+{ ?>
 													<h3>Be friends with the creator</h3>
 
-													<?php if($_SESSION['siteusername'] != $_video['author']) { ?>
+													<?php if ($_SESSION['siteusername'] != $_video['author'])
+    { ?>
 														<img style="width: 50px;height:50px;" src="/dynamic/pfp/<?php echo $__user_h->fetch_pfp($_video['author']); ?>">
 														<span style="display: inline-block; vertical-align:top;width: 100px;font-size:11px;">
 															<b><a href="/user/<?php echo htmlspecialchars($_video['author']); ?>"><?php echo htmlspecialchars($_video['author']); ?></a></b><br>
 															<?php echo $__user_h->fetch_subs_count($_video['author']); ?> subscribers<br>
 															<?php echo $__user_h->fetch_user_videos($_video['author']); ?> videos published<br>
 														</span><br><br>
-													<?php } else { ?>
+													<?php
+    }
+    else
+    { ?>
 														<img style="width: 50px;height:50px;" src="/dynamic/pfp/<?php echo $__user_h->fetch_pfp($_video['author']); ?>">
 														<span style="display: inline-block; vertical-align:top;width: 100px;font-size:11px;">
 															This is you.
 														</span><br><br>
-													<?php } ?>
+													<?php
+    } ?>
 
-													<?php if($_SESSION['siteusername'] != $_video['author']) { ?>
-														<?php if($_video['friended'] == false) { ?>
+													<?php if ($_SESSION['siteusername'] != $_video['author'])
+    { ?>
+														<?php if ($_video['friended'] == false)
+        { ?>
 															<a href="/friends">Send a friend request</a>
-														<?php } else { ?>
+														<?php
+        }
+        else
+        { ?>
 															Your friend request is pending.
-														<?php } ?>
-													<?php } else { ?>
+														<?php
+        } ?>
+													<?php
+    }
+    else
+    { ?>
 														You can't friend yourself.
-													<?php } ?>
+													<?php
+    } ?>
 													<hr><br>
 													<h3>Add to Favorites</h3>
-													<?php if($_video['favorited'] == false) { ?>
+													<?php if ($_video['favorited'] == false)
+    { ?>
 														<a href="/get/favorite?v=<?php echo $_video['rid']; ?>">Favorite Video</a>
-													<?php } else { ?>
+													<?php
+    }
+    else
+    { ?>
 														<a href="/get/unfavorite?v=<?php echo $_video['rid']; ?>">Unfavorite Video</a>
-													<?php } ?>
+													<?php
+    } ?>
 													<hr><br>
 													<h3>Add to a Playlist</h3>
 													<?php
-														$stmt = $__db->prepare("SELECT * FROM playlists WHERE author = :username ORDER BY id DESC LIMIT 20");
-														$stmt->bindParam(":username", $_SESSION['siteusername']);
-														$stmt->execute();
-														while($playlist = $stmt->fetch(PDO::FETCH_ASSOC)) { 
-															$buffer = json_decode($playlist['videos']);
-															@$rid = $buffer[0];
-															if(!empty($rid)) {
-																@$video = $__video_h->fetch_video_rid($rid);
-															} else {
-																$video['thumbnail'] = "";
-																$video['duration'] = 0;
-															}
+    $stmt = $__db->prepare("SELECT * FROM playlists WHERE author = :username ORDER BY id DESC LIMIT 20");
+    $stmt->bindParam(":username", $_SESSION['siteusername']);
+    $stmt->execute();
+    while ($playlist = $stmt->fetch(PDO::FETCH_ASSOC))
+    {
+        $buffer = json_decode($playlist['videos']);
+        @$rid = $buffer[0];
+        if (!empty($rid))
+        {
+            @$video = $__video_h->fetch_video_rid($rid);
+        }
+        else
+        {
+            $video['thumbnail'] = "";
+            $video['duration'] = 0;
+        }
 
-															$videos = count($buffer);
-													?>
+        $videos = count($buffer);
+?>
 														<a href="/get/add_to_playlist?id=<?php echo $_video['rid']; ?>&playlist=<?php echo $playlist['rid']; ?>">Add to <?php echo htmlspecialchars($playlist['title']); ?></a><br>
-													<?php } ?>
-												<?php } ?>
+													<?php
+    } ?>
+												<?php
+} ?>
 											</div>
 											<div id="watch-actions-error" class="watch-actions-panel hid">
 	  											kick push coast
@@ -662,40 +804,46 @@ if (window.yt.timing) {yt.timing.tick("bf");}    </script>
 													<img src="//s.ytimg.com/yt/img/pixel-vfl3z5WfW.gif" class="close-button">
 												</div>
 											</div>
-											<?php 
-												$stmt = $__db->prepare("SELECT * FROM video_response WHERE toid = :v ORDER BY id DESC LIMIT 4");
-												$stmt->bindParam(":v", $_GET['v']);
-												$stmt->execute();
-											?>
+											<?php
+$stmt = $__db->prepare("SELECT * FROM video_response WHERE toid = :v ORDER BY id DESC LIMIT 4");
+$stmt->bindParam(":v", $_GET['v']);
+$stmt->execute();
+?>
 
-											<?php if($stmt->rowCount() != 0) { ?>
+											<?php if ($stmt->rowCount() != 0)
+{ ?>
 												<div class="comments-section">
 													<a class="comments-section-see-all" href="/video_response_view_all?v=<?php echo htmlspecialchars($_video['rid']); ?>">
 													see all
 													</a>
 													<h4>Video Responses</h4>
 													<ul class="video-list">
-													<?php 
-														while($video = $stmt->fetch(PDO::FETCH_ASSOC)) { 
-															if($__video_h->video_exists($video['video'])) { 
-																$video = $__video_h->fetch_video_rid($video['video']);
-																$video['age'] = $__time_h->time_elapsed_string($video['publish']);		
-																$video['duration'] = $__time_h->timestamp($video['duration']);
-																$video['views'] = $__video_h->fetch_video_views($video['rid']);
-																$video['author'] = htmlspecialchars($video['author']);		
-																$video['title'] = htmlspecialchars($video['title']);
-																$video['description'] = $__video_h->shorten_description($video['description'], 50);
-													?>
+													<?php
+    while ($video = $stmt->fetch(PDO::FETCH_ASSOC))
+    {
+        if ($__video_h->video_exists($video['video']))
+        {
+            $video = $__video_h->fetch_video_rid($video['video']);
+            $video['age'] = $__time_h->time_elapsed_string($video['publish']);
+            $video['duration'] = $__time_h->timestamp($video['duration']);
+            $video['views'] = $__video_h->fetch_video_views($video['rid']);
+            $video['author'] = htmlspecialchars($video['author']);
+            $video['title'] = htmlspecialchars($video['title']);
+            $video['description'] = $__video_h->shorten_description($video['description'], 50);
+?>
 														<li class="video-list-item yt-tile-default">
 															<a href="/watch?v=<?php echo $video['rid']; ?>" class="related-video yt-uix-contextlink  yt-uix-sessionlink" data-sessionlink="<?php echo htmlspecialchars($_video['author']); ?>&amp;feature=watch_response"><span class="ux-thumb-wrap contains-addto "><span class="video-thumb ux-thumb yt-thumb-default-120 "><span class="yt-thumb-clip"><span class="yt-thumb-clip-inner"><img src="//s.ytimg.com/yt/img/pixel-vfl3z5WfW.gif" alt="<?php echo $video['title']; ?>" data-thumb="/dynamic/thumbs/<?php echo $video['thumbnail']; ?>" width="120"><span class="vertical-align"></span></span></span></span><span class="video-time"><?php echo $video['duration']; ?></span>
 															<button onclick=";return false;" title="Watch Later" type="button" class="addto-button video-actions addto-watch-later-button-sign-in yt-uix-button yt-uix-button-default yt-uix-button-short yt-uix-tooltip" data-button-menu-id="shared-addto-watch-later-login" data-video-ids="cjls0QsHOBE" role="button"><span class="yt-uix-button-content">  <img src="//s.ytimg.com/yt/img/pixel-vfl3z5WfW.gif" alt="Watch Later">
 															</span><img class="yt-uix-button-arrow" src="//s.ytimg.com/yt/img/pixel-vfl3z5WfW.gif" alt=""></button>
 															</span><span dir="ltr" class="title" title="<?php echo $video['title']; ?>"><?php echo $video['title']; ?></span><span class="stat attribution">by <span class="yt-user-name " dir="ltr"><?php echo $video['author']; ?></span></span><span class="stat view-count"><?php echo $video['views']; ?> views</span></a>
 														</li>
-													<?php } } ?>
+													<?php
+        }
+    } ?>
 													</ul>
 												</div>
-											<?php } ?>
+											<?php
+} ?>
 											<div class="comments-section " onmouseover="if (yt.www &amp;&amp; yt.www.watch &amp;&amp; yt.www.watch.livecomments) yt.www.watch.livecomments.handleCommentMouseEvent(this, event);" onmouseout="if (yt.www &amp;&amp; yt.www.watch &amp;&amp; yt.www.watch.livecomments) yt.www.watch.livecomments.handleCommentMouseEvent(this, event);">
 												<div id="comments-header-container">
 													<div id="comments-header">
@@ -708,24 +856,34 @@ if (window.yt.timing) {yt.timing.tick("bf");}    </script>
 														</h4>
 													</div>
 												</div>
-												<?php if(!isset($_SESSION['siteusername'])) { ?>
+												<?php if (!isset($_SESSION['siteusername']))
+{ ?>
 													<div class="comments-post-container clearfix">
 														<div class="comments-post-alert">
 															<a href="/sign_in">Sign In</a> or <a href="/sign_up">Sign Up</a><span class="comments-post-form-rollover-text"> now to post a comment!</span>
 														</div>
 													</div>
-												<?php } else if($_video['commenting'] == "d") { ?>
+												<?php
+}
+else if ($_video['commenting'] == "d")
+{ ?>
 													<div class="comments-disabled-message">
 														<img src="http://s.ytimg.com/yt/img/icon_comments_disabled-vflxokpZC.png">
 														<span>Adding comments has been disabled for this video.</span>
 													</div>
-												<?php } else if($__user_h->if_blocked($_video['author'], $_SESSION['siteusername'])) { ?>
+												<?php
+}
+else if ($__user_h->if_blocked($_video['author'], $_SESSION['siteusername']))
+{ ?>
 													<div class="comments-post-container clearfix">
 														<div class="comments-post-alert">
 															This user has blocked you!
 														</div>
 													</div>
-												<?php } else { ?>
+												<?php
+}
+else
+{ ?>
 													<div class="comments-post-container clearfix">
 														<form method="post" action="/comment_service_ajax">
 															<div class="yt-alert yt-alert-default yt-alert-error hid comments-post-message">
@@ -756,7 +914,8 @@ if (window.yt.timing) {yt.timing.tick("bf");}    </script>
 															</p>
 														</form>
 													</div>
-												<?php } ?><br>
+												<?php
+} ?><br>
 												<div id="live-comments-setting-scroll" class="live-comments-setting hid">
 													<span id="live-comments-count"></span>
 													<a onclick="yt.www.watch.livecomments.setScroll(true); return false;">Update automatically</a>
@@ -766,38 +925,40 @@ if (window.yt.timing) {yt.timing.tick("bf");}    </script>
 												</div>
 												<ul class="comment-list" id="live_comments">
 														<?php
-														$results_per_page = 20;
+$results_per_page = 20;
 
-														$stmt = $__db->prepare("SELECT * FROM comments WHERE toid = :rid ORDER BY id DESC");
-														$stmt->bindParam(":rid", $_video['rid']);
-														$stmt->execute();
+$stmt = $__db->prepare("SELECT * FROM comments WHERE toid = :rid ORDER BY id DESC");
+$stmt->bindParam(":rid", $_video['rid']);
+$stmt->execute();
 
-														$number_of_result = $stmt->rowCount();
-														$number_of_page = ceil ($number_of_result / $results_per_page);  
+$number_of_result = $stmt->rowCount();
+$number_of_page = ceil($number_of_result / $results_per_page);
 
-														if (!isset ($_GET['page']) ) {  
-															$page = 1;  
-														} else {  
-															$page = (int)$_GET['page'];  
-														}  
+if (!isset($_GET['page']))
+{
+    $page = 1;
+}
+else
+{
+    $page = (int)$_GET['page'];
+}
 
-														$page_first_result = ($page - 1) * $results_per_page;  
+$page_first_result = ($page - 1) * $results_per_page;
 
-														$stmt = $__db->prepare("SELECT * FROM comments WHERE toid = :rid ORDER BY id DESC LIMIT :pfirst, :pper");
-														$stmt->bindParam(":rid", $_video['rid']);
-														$stmt->bindParam(":pfirst", $page_first_result);
-														$stmt->bindParam(":pper", $results_per_page);
-														$stmt->execute();
+$stmt = $__db->prepare("SELECT * FROM comments WHERE toid = :rid ORDER BY id DESC LIMIT :pfirst, :pper");
+$stmt->bindParam(":rid", $_video['rid']);
+$stmt->bindParam(":pfirst", $page_first_result);
+$stmt->bindParam(":pper", $results_per_page);
+$stmt->execute();
 
-														while($comment = $stmt->fetch(PDO::FETCH_ASSOC)) { 
-															if($__video_h->if_comment_liked($comment['id'], $_SESSION['siteusername'], true))
-																$comment['liked'] = true;
-															else if($__video_h->if_comment_liked($comment['id'], $_SESSION['siteusername'], false))
-																$comment['disliked'] = true;
-																
-															$comment['likes']  = $__video_h->get_comment_likes($comment['id'], true);
-															$comment['likes'] -= $__video_h->get_comment_likes($comment['id'], false);
-													?>
+while ($comment = $stmt->fetch(PDO::FETCH_ASSOC))
+{
+    if ($__video_h->if_comment_liked($comment['id'], $_SESSION['siteusername'], true)) $comment['liked'] = true;
+    else if ($__video_h->if_comment_liked($comment['id'], $_SESSION['siteusername'], false)) $comment['disliked'] = true;
+
+    $comment['likes'] = $__video_h->get_comment_likes($comment['id'], true);
+    $comment['likes'] -= $__video_h->get_comment_likes($comment['id'], false);
+?>
 
 														<li class="comment yt-tile-default " data-author-viewing="" data-author-id="-uD01K8FQTeOSS5sniRFzQ" data-id="<?php echo $comment['id']; ?>" data-score="0">
 															<div class="comment-body">
@@ -814,19 +975,26 @@ if (window.yt.timing) {yt.timing.tick("bf");}    </script>
 																			<span dir="ltr"><?php echo $__time_h->time_elapsed_string($comment['date']); ?><span>
 																			</span>
 																			</span></span>
-																			<?php if($comment['likes'] != 0) { ?>
-																				<?php if($comment['likes'] < 0) { ?>
+																			<?php if ($comment['likes'] != 0)
+    { ?>
+																				<?php if ($comment['likes'] < 0)
+        { ?>
 																				<span dir="ltr" class="comments-rating-positive" title="9 up, 1 down" style="color:#c16a6a;">
 																					<?php echo abs($comment['likes']);; ?>
 																					<img src="/yt/imgbin/dislike.png">
 																				</span>
-																				<?php } else { ?>
+																				<?php
+        }
+        else
+        { ?>
 																				<span dir="ltr" class="comments-rating-positive" title="9 up, 1 down">
 																					<?php echo $comment['likes']; ?>
 																					<img class="comments-rating-thumbs-up" src="//s.ytimg.com/yts/img/pixel-vfl3z5WfW.gif">
 																				</span>
-																				<?php } ?>
-																			<?php } ?>
+																				<?php
+        } ?>
+																			<?php
+    } ?>
 																		</p>
 																	</div>
 																	<div class="comment-actions">
@@ -849,7 +1017,8 @@ if (window.yt.timing) {yt.timing.tick("bf");}    </script>
 																			</button>
 																		</span>
 																	</div>
-																<?php if(isset($_SESSION['siteusername'])) { ?> 
+																<?php if (isset($_SESSION['siteusername']))
+    { ?> 
 																	<li id="reply_to_<?php echo $comment['id']; ?>" style="display: none;" class="comment yt-tile-default  child" data-tag="O" data-author-viewing="" data-id="iRV7EkT9us81mDLFDSB6FAsB156Fdn13HUmTm26C3PE" data-score="34" data-author="<?php echo htmlspecialchars($row['author']); ?>">
 
 																	<div class="comment-body">
@@ -865,17 +1034,19 @@ if (window.yt.timing) {yt.timing.tick("bf");}    </script>
 																			</form>
 																		</div>
 																	</div>
-																<?php } ?>
+																<?php
+    } ?>
 																</div>
 															</div>
 														</li>
-														<?php 
-															$stmt2 = $__db->prepare("SELECT * FROM comment_reply WHERE toid = :rid ORDER BY id DESC");
-															$stmt2->bindParam(":rid", $comment['id']);
-															$stmt2->execute();
+														<?php
+    $stmt2 = $__db->prepare("SELECT * FROM comment_reply WHERE toid = :rid ORDER BY id DESC");
+    $stmt2->bindParam(":rid", $comment['id']);
+    $stmt2->execute();
 
-															while($reply = $stmt2->fetch(PDO::FETCH_ASSOC)) { 
-														?>
+    while ($reply = $stmt2->fetch(PDO::FETCH_ASSOC))
+    {
+?>
 															<li class="comment yt-tile-default " style="margin-left: 30px;" data-author-viewing="" data-author-id="-uD01K8FQTeOSS5sniRFzQ" data-id="<?php echo $reply['id']; ?>" data-score="0">
 																<div class="comment-body">
 																	<div class="content-container">
@@ -916,8 +1087,10 @@ if (window.yt.timing) {yt.timing.tick("bf");}    </script>
 																	</div>
 																</div>
 															</li>
-														<?php } ?>
-													<?php } ?>
+														<?php
+    } ?>
+													<?php
+} ?>
 												</ul>
 											</div>
 											<div class="comments-section">
@@ -955,19 +1128,23 @@ if (window.yt.timing) {yt.timing.tick("bf");}    </script>
 										<div id="watch-related-container" class="watch-sidebar-body">
 											<ul id="watch-related" class="video-list">
 												<?php
-													$stmt = $__db->prepare("SELECT * FROM playlists ORDER BY rand() LIMIT 2");
-													$stmt->execute();
-													while($_playlist = $stmt->fetch(PDO::FETCH_ASSOC)) {	
-														$_playlist['videos'] = json_decode($_playlist['videos']);
-														$_playlist['count'] = 1;
+$stmt = $__db->prepare("SELECT * FROM playlists ORDER BY rand() LIMIT 2");
+$stmt->execute();
+while ($_playlist = $stmt->fetch(PDO::FETCH_ASSOC))
+{
+    $_playlist['videos'] = json_decode($_playlist['videos']);
+    $_playlist['count'] = 1;
 
-														if($__video_h->video_exists($_playlist['videos'][0])) {
-															$video = $__video_h->fetch_video_rid($_playlist['videos'][0]);
-														} else {
-															$video = [];
-															$video['thumbnail'] = "default.jpg";
-														}
-												?>
+    if ($__video_h->video_exists($_playlist['videos'][0]))
+    {
+        $video = $__video_h->fetch_video_rid($_playlist['videos'][0]);
+    }
+    else
+    {
+        $video = [];
+        $video['thumbnail'] = "default.jpg";
+    }
+?>
 												<li class="video-list-item">
 													<a href="/view_playlist?v=<?php echo $_playlist['rid']; ?>" class="related-playlist yt-uix-contextlink  yt-uix-sessionlink" data-sessionlink="ved=CAMQzhooAA%3D%3D&amp;ei=CKf4md_r7rMCFYMfRAodLGlRiA%3D%3D&amp;feature=list_other">
 														<span class="ux-thumb-wrap">
@@ -1011,25 +1188,28 @@ if (window.yt.timing) {yt.timing.tick("bf");}    </script>
 														<span dir="ltr" class="title" title="<?php echo htmlspecialchars($_playlist['title']); ?>"><?php echo htmlspecialchars($_playlist['title']); ?></span>
 													</a>
 												</li>
-												<?php } ?>
+												<?php
+} ?>
 												<div id="ppv-container" class="hid"></div>
 												<?php
-													$stmt = $__db->prepare("SELECT * FROM videos WHERE visibility = 'n' ORDER BY rand() LIMIT 20");
-													$stmt->execute();
-													while($video = $stmt->fetch(PDO::FETCH_ASSOC)) {	
-														$video['age'] = $__time_h->time_elapsed_string($video['publish']);		
-														$video['duration'] = $__time_h->timestamp($video['duration']);
-														$video['views'] = $__video_h->fetch_video_views($video['rid']);
-														$video['author'] = htmlspecialchars($video['author']);		
-														$video['title'] = htmlspecialchars($video['title']);
-														$video['description'] = $__video_h->shorten_description($video['description'], 50);
-												?>
+$stmt = $__db->prepare("SELECT * FROM videos WHERE visibility = 'n' ORDER BY rand() LIMIT 20");
+$stmt->execute();
+while ($video = $stmt->fetch(PDO::FETCH_ASSOC))
+{
+    $video['age'] = $__time_h->time_elapsed_string($video['publish']);
+    $video['duration'] = $__time_h->timestamp($video['duration']);
+    $video['views'] = $__video_h->fetch_video_views($video['rid']);
+    $video['author'] = htmlspecialchars($video['author']);
+    $video['title'] = htmlspecialchars($video['title']);
+    $video['description'] = $__video_h->shorten_description($video['description'], 50);
+?>
 												<li class="video-list-item"><a href="/watch?v=<?php echo $video['rid']; ?>" class="related-video yt-uix-contextlink  yt-uix-sessionlink" data-sessionlink="ved=CAIQzRooAA%3D%3D&amp;<?php echo htmlspecialchars($_video['author']); ?>&amp;feature=relmfu"><span class="ux-thumb-wrap contains-addto "><span class="video-thumb ux-thumb yt-thumb-default-120 "><span class="yt-thumb-clip"><span class="yt-thumb-clip-inner"><img src="//s.ytimg.com/yt/img/pixel-vfl3z5WfW.gif" alt="<?php echo $video['title']; ?>" onerror=";this.src='/dynamic/thumbs/default.jpg';" data-thumb="/dynamic/thumbs/<?php echo $video['thumbnail']; ?>" width="120"><span class="vertical-align"></span></span></span></span><span class="video-time"><?php echo $video['duration']; ?></span>
 													<button onclick=";return false;" title="Watch Later" type="button" class="addto-button video-actions addto-watch-later-button-sign-in yt-uix-button yt-uix-button-default yt-uix-button-short yt-uix-tooltip" data-button-menu-id="shared-addto-watch-later-login" data-video-ids="gyAaIKF6tSQ" role="button"><span class="yt-uix-button-content">  <img src="//s.ytimg.com/yt/img/pixel-vfl3z5WfW.gif" alt="Watch Later">
 													</span><img class="yt-uix-button-arrow" src="//s.ytimg.com/yt/img/pixel-vfl3z5WfW.gif" alt=""></button>
 													</span><span dir="ltr" class="title" title="<?php echo $video['title']; ?>"><?php echo $video['title']; ?></span><span class="stat attribution">by <span class="yt-user-name " dir="ltr"><?php echo htmlspecialchars($video['author']); ?></span></span><span class="stat view-count"><?php echo $video['views']; ?> views</span></a>
 												</li>
-												<?php } ?>
+												<?php
+} ?>
 											</ul>
 											<ul id="watch-more-related" class="video-list hid">
 											<p class="yt-spinner">
@@ -1054,7 +1234,7 @@ if (window.yt.timing) {yt.timing.tick("bf");}    </script>
 				</div>
 				<!-- end content -->
 			</div>
-			<div id="footer-container"><?php require($_SERVER['DOCUMENT_ROOT'] . "/s/mod/footer.php") ?></div>
+			<div id="footer-container"><?php require ($_SERVER['DOCUMENT_ROOT'] . "/s/mod/footer.php") ?></div>
 			<div id="playlist-bar" class="hid passive editable" data-video-url="/watch?v=&amp;feature=BFql&amp;playnext=1&amp;list=QL" data-list-id="" data-list-type="QL">
 				<div id="playlist-bar-bar-container">
 					<div id="playlist-bar-bar">
@@ -1247,6 +1427,14 @@ if (window.yt.timing) {yt.timing.tick("bf");}    </script>
       yt.setConfig({'PLAYER_REFERENCE': youTubePlayer});
     })();
   </script>
+  
+  <?php if (@$_SESSION['siteusername'] == $_video['author'])
+{ ?>
+  <script id="js-1699250385" src="https://s.ytimg.com/yts/jsbin/www-watch-edit-vfly8oON1.js" data-loaded="true"></script>
+  <?php
+} ?>
+  
+  
 		<script>
 			yt.setConfig({
 			  'SUBSCRIBE_AXC': "",
@@ -1522,9 +1710,9 @@ if (window.yt.timing) {yt.timing.tick("bf");}    </script>
 			if (window.yt.timing) {yt.timing.tick("js_foot");}    
 		</script>
 		<script>
-			var subscribed = <?php echo($_video['subscribed'] ? 'true' : 'false') ?>;
-			var liked = <?php echo($_video['liked'] ? 'true' : 'false') ?>;
-			var loggedIn = <?php echo(isset($_SESSION['siteusername']) ? 'true' : 'false') ?>;
+			var subscribed = <?php echo ($_video['subscribed'] ? 'true' : 'false') ?>;
+			var liked = <?php echo ($_video['liked'] ? 'true' : 'false') ?>;
+			var loggedIn = <?php echo (isset($_SESSION['siteusername']) ? 'true' : 'false') ?>;
 			var alerts = 0;
  
 			function subscribe() {
