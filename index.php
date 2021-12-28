@@ -65,17 +65,17 @@
 							<?php 
 								if(isset($_SESSION['siteusername'])) {
 								?>
-								<div style="/*! margin-top: 0px; *//*! margin-left: 10px; *//*! margin-bottom: 13px; */height: 99px;" class="guide-section feed-header channel first"><img alt="" src="/dynamic/pfp/<?php echo $__user_h->fetch_pfp($_SESSION['siteusername']); ?>" style="height: 88px;position: relative;top: 4px;left: 4px;" class="feed-header-thumb channel-thumb" width="88px"><div id="links" style="/*! margin-left: 5px; */position: relative;left: 13px;top: 7px;"><div style="font-size: 11px;margin-bottom: 6px;" class="metadata">
-								<a href="/user/<?php echo htmlspecialchars($_SESSION['siteusername']); ?>" style="color: inherit;">My channel
+								<div class="guide-section guide-user-container feed-header channel first"><img alt="" src="/dynamic/pfp/<?php echo $__user_h->fetch_pfp($_SESSION['siteusername']); ?>" class="feed-header-thumb channel-thumb" width="88px"><div id="links"><div  class="metadata">
+								<a href="/user/<?php echo htmlspecialchars($_SESSION['siteusername']); ?>" >My channel
 								<img src="//s.ytimg.com/yt/img/pixel-vfl3z5WfW.gif" class="see-more-arrow" alt=""></a>        
-								</div><div style="font-size: 11px;margin-bottom: 6px;" class="metadata">
-								<a href="/my_videos" style="color: inherit;">Videos</a>        </div><div style="font-size: 11px;margin-bottom: 6px;" class="metadata">
-								<a href="/playlists" style="color: inherit;">Playlists</a>        </div><div style="font-size: 11px;margin-bottom: 6px;" class="metadata">
-								<a href="/logout" style="color: inherit;">Log Out</a>        </div><div style="font-size: 11px;margin-bottom: 6px;" class="metadata">
-								<a href="/inbox/" style="color: inherit;">Inbox</a>        </div><div style="font-size: 11px;margin-bottom: 6px;" class="metadata">
+								</div><div  class="metadata">
+								<a href="/my_videos" >Videos</a>        </div><div  class="metadata">
+								<a href="/playlists" >Playlists</a>        </div><div  class="metadata">
+								<a href="/logout" >Log Out</a>        </div><div  class="metadata">
+								<a href="/inbox/" >Inbox</a>        </div><div  class="metadata">
 								</div></div></div>
 
-								<div class="guide-section yt-uix-expander  ">
+								<div class="guide-section index-section yt-uix-expander first">
 								<h3 class="guide-item-container guide-item-action">
 									<a class="guide-item" href="/inbox/">
 									<span class="thumb">
@@ -88,7 +88,6 @@
 								</ul>
 								<div class="guide-item-container">
 									<span class="guide-item guide-item-action guide-item-fake">
-							<a style="display: none;" href="/web/20121123233507/http://www.youtube.com/videos?feature=hp">&nbsp;<img src="//s.ytimg.com/yt/img/pixel-vfl3z5WfW.gif" class="see-more-arrow" alt=""></a>        </span>
 								</div>
 								</div>
 								<?php } ?>
@@ -218,6 +217,7 @@
 								<img src="//s.ytimg.com/yt/img/pixel-vfl3z5WfW.gif" alt="">
 								</a>
 							</div>
+							<h3 class="sidebar-module-header">Announcements</h3>
 							<h2>SubRocks is back!</h2>
 							<p class="sidebar-module-description">
 								I have decided to bring SubRocks back <br>  Let's hope SubRock is better than bhief's SubRocks
@@ -316,24 +316,6 @@
 							</div>
 						</div>
 						<div id="feed-background"></div>
-						<div id="footer-ads">
-							<div id="ad_creative_3" class="ad-div " style="z-index: 1">
-								<iframe id="ad_creative_iframe_3" height="1" width="1" scrolling="no" frameborder="0" style="z-index: 1" src="//ad-g.doubleclick.net/N6762/adi/mkt.ythome_1x1/;sz=1x1;tile=3;plat=pc;dc_dedup=1;kcr=us;kga=-1;kgg=-1;klg=en;kmyd=ad_creative_3;kt=K;ord=7554901073022560?"></iframe>
-								<script>
-									(function() {
-									  var addTimestamp = (Math.floor(Math.random() * 1000) == 0);
-									  if (addTimestamp) {
-									    var kts = new Date().getTime();
-									    var iframeSrc = "//ad-g.doubleclick.net/N6762/adi/mkt.ythome_1x1/;sz=1x1;tile=3;plat=pc;dc_dedup=1;kcr=us;kga=-1;kgg=-1;klg=en;kmyd=ad_creative_3;kt=K;kts=" + kts + ";ord=7554901073022560?";
-									  } else {
-									    var iframeSrc = "//ad-g.doubleclick.net/N6762/adi/mkt.ythome_1x1/;sz=1x1;tile=3;plat=pc;dc_dedup=1;kcr=us;kga=-1;kgg=-1;klg=en;kmyd=ad_creative_3;kt=K;ord=7554901073022560?";
-									  }
-									  var adIframe = document.getElementById("ad_creative_iframe_3");
-									  adIframe.src = iframeSrc;
-									})();
-								</script>
-							</div>
-						</div>
 					</div>
 				</div>
 				<!-- end content -->

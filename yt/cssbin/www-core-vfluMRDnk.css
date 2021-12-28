@@ -16231,3 +16231,13 @@ screen and (min-resolution:1.5dppx) {
 .ytg-last {
     margin-right: 0
 }
+
+.clearer {
+    clear: both;
+}
+
+.separator {
+    border-top: 1px solid #c1c1c1;
+    margin-top: 10px;
+    padding-top: 10px;
+}

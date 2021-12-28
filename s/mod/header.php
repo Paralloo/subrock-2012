@@ -33,19 +33,23 @@
 		</span></button></span></div>
 	</div>
 	<?php } else { ?>
-		<div id="masthead-user-bar-container">
-			<div id="masthead-user-bar">
-				<div id="masthead-user">
-					<span id="masthead-gaia-user-expander" class="masthead-user-menu-expander masthead-expander" onclick="yt.www.masthead.toggleExpandedMasthead()"><span id="masthead-gaia-user-wrapper" class="yt-rounded" tabindex="0"><?php echo htmlspecialchars($_SESSION['siteusername']); ?></span></span>
-							<?php if($__user_h->fetch_unread_pms($_SESSION['siteusername']) != 0) { ?>
-							<button type="button" onclick=";window.location.href=this.getAttribute('href');return false;" href="/inbox/" class="sb-button sb-notif-on yt-uix-button" id="sb-button-notify" role="button"><span class="yt-uix-button-content"><?php echo $__user_h->fetch_unread_pms($_SESSION['siteusername']); ?></span></button>
-					<?php } else { ?>
-							<button type="button" onclick=";window.location.href=this.getAttribute('href');return false;" href="/inbox/" class="sb-button sb-notif-off yt-uix-button" id="sb-button-notify" role="button"><span class="yt-uix-button-content"><?php echo $__user_h->fetch_unread_pms($_SESSION['siteusername']); ?></span></button>
-					<?php } ?>
-							<span id="masthead-gaia-photo-expander" class="masthead-user-menu-expander masthead-expander" onclick="yt.www.masthead.toggleExpandedMasthead()"><span id="masthead-gaia-photo-wrapper" class="yt-rounded"><span id="masthead-gaia-user-image"><span class="clip"><span class="clip-center"><img src="/dynamic/pfp/<?php echo $__user_h->fetch_pfp($_SESSION['siteusername']); ?>" alt=""><span class="vertical-center"></span></span></span></span><span class="masthead-expander-arrow"></span></span></span>
+			<div id="masthead-user-bar-container">
+				<div id="masthead-user-bar">
+					<div id="masthead-user">
+						<span id="masthead-user-expander" class="yt-uix-expander" data-expander-action="yt.www.masthead.toggleExpandedMasthead"><span id="masthead-user-wrapper" class="yt-uix-expander-head yt-rounded" tabindex="0"><button type="button" id="masthead-user-button" onclick=";return false;" class="yt-uix-button yt-uix-button-text yt-uix-button-toggled" data-button-toggle="true" role="button"><span class="yt-uix-button-content">  <span id="masthead-user-image">
+						<span class="clip">
+							<span class="clip-center">
+								<img src="/dynamic/pfp/<?php echo $__user_h->fetch_pfp($_SESSION['siteusername']); ?>" alt="<?php echo htmlspecialchars($_SESSION['siteusername']); ?>">
+								<span class="vertical-center"></span>
+							</span>
+						</span>
+						</span>
+						<span class="masthead-user-username"><?php echo htmlspecialchars($_SESSION['siteusername']); ?></span>
+							<span class="yt-uix-expander-arrow"></span>
+						</span></button></span></span>
+					</div>
 				</div>
-			</div>
-		</div>
+    	</div>
 	<?php } ?>
 	<div id="masthead-search-bar-container">
 		<div id="masthead-search-bar">
