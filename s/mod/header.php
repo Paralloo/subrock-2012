@@ -24,7 +24,7 @@
 		<div id="masthead-user-display"><span id="masthead-user-wrapper"><button href="/sign_in" type="button" id="masthead-user-button" onclick=";window.location.href=this.getAttribute('href');return false;" class=" yt-uix-button yt-uix-button-text" role="button"><span class="yt-uix-button-content">  <span id="masthead-user-image">
 			<span class="clip">
 			<span class="clip-center">
-				<img src="//s.ytimg.com/yts/img/silhouette48-vflLdu7sh.png" alt="">
+				<img src="//s.ytimg.com/yt/img/no_videos_140-vfl5AhOQY.png" alt="">
 				<span class="vertical-center"></span>
 			</span>
 			</span>
