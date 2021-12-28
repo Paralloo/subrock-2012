@@ -157,7 +157,7 @@ $_video['favorited'] = $__video_h->if_favorited(@$_SESSION['siteusername'], $_vi
 											
 
 
-									<a href="/edit_video?id=<?php echo $_video['rid']; ?>" class="yt-uix-button yt-uix-sessionlink yt-uix-button-subnav yt-uix-button-dark" data-sessionlink="ei=CMCA1_3robMCFSrJRAodqnnxKQ%3D%3D"><span class="yt-uix-button-content">Edit</span></a>
+									<a href="/edit_video?id=<?php echo $_video['rid']; ?>" class="yt-uix-tooltip-reverse  yt-uix-button yt-uix-button-default yt-uix-tooltip" data-sessionlink="ei=CMCA1_3robMCFSrJRAodqnnxKQ%3D%3D"><span class="yt-uix-button-content">Edit</span></a>
 										  </li>
 
 												<li>
@@ -250,12 +250,15 @@ $_video['favorited'] = $__video_h->if_favorited(@$_SESSION['siteusername'], $_vi
 									</span>
 								</h1>
 								<div id="watch-headline-user-info">
-									<button style="margin-right: -5px;" href="/user/<?php echo htmlspecialchars($_video['author']); ?>" type="button" class="start yt-uix-button yt-uix-button-default" onclick=";window.location.href=this.getAttribute('href');return false;" role="button">
-										<span class="yt-uix-button-content"><?php echo htmlspecialchars($_video['author']); ?></span>
-									</button>
+								  <a id="watch-username" class="inline-block" rel="author" href="/user/
+		<?php echo htmlspecialchars($_video['author']); ?>">
+								    <strong> <?php echo htmlspecialchars($_video['author']); ?> </strong>
+								  </a>
+								  									<button onclick="_toggleclass(this,'yt-uix-expander-collapsed');return false;" type="button" id="watch-mfu-button" class="yt-uix-expander-collapsed yt-uix-button yt-uix-button-default" data-button-toggle="true" data-video-user-id="<?php echo htmlspecialchars($_video['author']); ?>" data-button-menu-id="some-nonexistent-menu" data-video-id="<?php echo htmlspecialchars($_video['rid']); ?>" data-button-action="yt.www.watch.watch5.handleToggleMoreFromUser" role="button"><span class="yt-uix-button-content"><?php echo $_video['author_videos']; ?> videos </span><img class="yt-uix-button-arrow" src="//s.ytimg.com/yt/img/pixel-vfl3z5WfW.gif" alt=""></button>
+
 									<?php if (@$_SESSION['siteusername'] == $_video['author'])
 { ?>
-									<div class="yt-subscription-button-hovercard yt-uix-hovercard" data-card-class="watch-subscription-card"><span class="yt-uix-button-context-light yt-uix-button-subscription-container">  <button disabled="True" onclick=";return false;" title="No need to subscribe to yourself!" type="button" class="yt-subscription-button end yt-uix-button yt-uix-button-default yt-uix-tooltip" role="button" data-tooltip-text="No need to subscribe to yourself!"><span class="yt-uix-button-content">Subscribe </span></button>
+									<span class="yt-subscription-button-hovercard yt-uix-hovercard" data-card-class="watch-subscription-card"><span class="yt-uix-button-context-light yt-uix-button-subscription-container">  <button disabled="True" onclick=";return false;" title="No need to subscribe to yourself!" type="button" class="yt-subscription-button end yt-uix-button yt-uix-button-default yt-uix-tooltip" role="button" data-tooltip-text="No need to subscribe to yourself!"><span class="yt-uix-button-content">Subscribe </span></button>
 									<span class="yt-subscription-button-disabled-mask"></span></span><div class="yt-uix-hovercard-content hid">  <p class="loading-spinner">
 										<img src="//s.ytimg.com/yts/img/pixel-vfl3z5WfW.gif" alt="">
 									Loading...
@@ -265,8 +268,8 @@ $_video['favorited'] = $__video_h->if_favorited(@$_SESSION['siteusername'], $_vi
 }
 else
 { ?>
-									<div class="yt-subscription-button-hovercard yt-uix-hovercard">
-										<span class="yt-uix-button-context-light yt-uix-button-subscription-container">
+									<span class="subscription-container">
+										<span class="yt-uix-button-context-light">
 										<button 
 											onclick=";subscribe();return false;" 
 											title="" 
@@ -277,10 +280,6 @@ else
         echo "subscribed ";
     } ?>yt-subscription-button  yt-uix-button yt-uix-button-subscription yt-uix-tooltip" 
 											role="button">
-											<span class="yt-uix-button-icon-wrapper">
-												<img class="yt-uix-button-icon yt-uix-button-icon-subscribe" src="//s.ytimg.com/yt/img/pixel-vfl3z5WfW.gif" alt="">
-												<span class="yt-valign-trick"></span>
-											</span>
 											<span class="yt-uix-button-content">
 												<span class="subscribe-label">Subscribe</span>
 												<span class="subscribed-label">Subscribed</span>
@@ -297,7 +296,6 @@ else
 									</div>
 									<?php
 } ?>
-									<button onclick="_toggleclass(this,'yt-uix-expander-collapsed');return false;" type="button" id="watch-mfu-button" class="yt-uix-expander-collapsed yt-uix-button yt-uix-button-default" data-button-toggle="true" data-video-user-id="<?php echo htmlspecialchars($_video['author']); ?>" data-button-menu-id="some-nonexistent-menu" data-video-id="<?php echo htmlspecialchars($_video['rid']); ?>" data-button-action="yt.www.watch.watch5.handleToggleMoreFromUser" role="button"><span class="yt-uix-button-content"><?php echo $_video['author_videos']; ?> videos </span><img class="yt-uix-button-arrow" src="//s.ytimg.com/yt/img/pixel-vfl3z5WfW.gif" alt=""></button>
 								</div>
 								<div id="watch-more-from-user" class="collapsed">
 									<div id="watch-channel-discoverbox" class="yt-rounded">
@@ -315,13 +313,9 @@ else
           <script>
 if (window.yt.timing) {yt.timing.tick("bf");}    </script>
 
-          <div id="watch-player" class="flash-player"></div>
-    <script>
-      (function() {
-        var swf = "      \u003cembed type=\"application\/x-shockwave-flash\"     s\u0072c=\"\/\/s.ytimg.com\/yt\/swfbin\/watch_as3-vfloWhEvq.swf\"     id=\"movie_player\"    flashvars=\"fexp=907722%2C906062%2C910102%2C927104%2C922401%2C920704%2C912806%2C927201%2C913546%2C913556%2C925109%2C919003%2C920201%2C912706%2C900816\u0026amp;ptk=youtube_multi\u0026amp;enablecsi=1\u0026amp;allow_embed=1\u0026amp;rvs=view_count%3D24%252C209%252C324%26feature_type%3Dfvwp%26author%3DProtoOfSnagem%26title%3DHEYYEYAAEYAAAEYAEYAA%26length_seconds%3D127%26featured%3D1%26id%3DZZ5LpwO-An4%2Cview_count%3D13%252C121%252C773%26author%3Ddersiraresmc%26length_seconds%3D365%26id%3Dkv4RIhMpV40%26title%3DCritical%2BHits%2BVol.2%2Cview_count%3D9%252C033%252C824%26author%3Dayazkhatrier%26length_seconds%3D204%26id%3Dr6VCnYkNYLo%26title%3D100%2BGreatest%2BInternet%2BVideos%2BIn%2B3%2BMinutes%2Cview_count%3D642%252C634%26author%3DFa1lsp3cxD%26length_seconds%3D48%26id%3D8e47ianJYGg%26title%3DFamily%2BGuy-%2BStewie%2Bgets%2Brick%2Broll%2527d%2Cview_count%3D861%252C498%26author%3DThePrimeCronus%26length_seconds%3D3749%26id%3DS3P2iaWma-Y%26title%3D1-Hour%2BEpic%2BMusic%2B%257C%2BTwo%2BSteps%2BFrom%2BHell%2BVol.%2B2%2Cview_count%3D2%252C285%252C240%26author%3Dlilsportsplaya69%26length_seconds%3D197%26id%3DWYLvdLWkhk8%26title%3DChuck%2BNorris%2Bhears%2Bhis%2Bown%2Bfacts...%2Cview_count%3D2%252C010%252C479%26author%3Dbeeerent%26length_seconds%3D230%26id%3DLjur6v7-yoc%26title%3DHitler%2Bfinds%2Bout%2BPokemon%2Baren%2527t%2Breal%2Cview_count%3D79%252C447%252C461%26author%3Dakhilkhatri0608%26length_seconds%3D350%26id%3DVSrAJsWvEIc%26title%3DOne%2Bof%2Bthe%2Bbest%2Binspirational%2Bvideos%2Bever%2B-%2BSusan%2BBoyle%2B-%2BBritains%2BGot%2BTalent%2B2009%2Cview_count%3D299%252C142%26author%3Druigejoostnl%26length_seconds%3D52%26id%3DnAElQjPx7LQ%26title%3DBest%2Bninja%2Bdefuse%2Bever%2521%2521%2521%2BSND%2BMW3%2Cview_count%3D10%252C582%252C034%26author%3DTheSonicParadoxTeam%26length_seconds%3D471%26id%3DTCvMARhbBu8%26title%3DSonic%2BShorts%2B-%2BVolume%2B4%2Cview_count%3D10%252C345%252C179%26author%3DZeljko9NS5Serbia%26length_seconds%3D373%26id%3D1jre6_FBBc0%26title%3DKid%2BCudi%2B-%2BPursuit%2Bof%2BHappiness%2B%2528Steve%2BAoki%2BRemix%2529%2B-%2BProject%2BX%2B%2528Party%2BTrailer%2BScene%2529%2BHD%2Cview_count%3D1%252C593%252C982%26author%3DLipigl%26length_seconds%3D42%26id%3DoB6bk5S2_Zc%26title%3DThey%2Bsee%2Bme%2Btrollin%2527%2BThey%2Bhatin%2527\u0026amp;vq=auto\u0026amp;account_playback_token=\u0026amp;autohide=2\u0026amp;csi_page_type=watch5\u0026amp;keywords=Cotter548%2CShawn%2CCotter%2Clol%2Cgamefaqs%2CCE%2Creddit%2Crettocs%2Cno%2Cbrb%2Cafk%2Clawl%2Cpwnt%2CRickroll%2CRickroll%27d%2CRick%2CRoll%2CDuckroll%2CDuck%2Crick%2Croll%2Castley%2Cnever%2Cgonna%2Cgive%2Cyou%2Cup%2Clet%2Cdown%2Crun%2Caround%2Cand%2Churt\u0026amp;cr=US\u0026amp;iv3_module=http%3A%2F%2Fs.ytimg.com%2Fyt%2Fswfbin%2Fiv3_module-vflGCS_pr.swf\u0026amp;fmt_list=43%2F320x240%2F99%2F0%2F0%2C34%2F320x240%2F9%2F0%2F115%2C18%2F320x240%2F9%2F0%2F115%2C5%2F320x240%2F7%2F0%2F0%2C36%2F320x240%2F99%2F0%2F0%2C17%2F176x144%2F99%2F0%2F0\u0026amp;title=RickRoll%27D\u0026amp;length_seconds=212\u0026amp;enablejsapi=1\u0026amp;advideo=1\u0026amp;tk=o3_r7m6s_HAaFxeywi14S3qFcY4uSrEiWfZ8KVUoyEB_gj1rlrELuQ%3D%3D\u0026amp;iv_load_policy=1\u0026amp;iv_module=http%3A%2F%2Fs.ytimg.com%2Fyt%2Fswfbin%2Fiv_module-vflBJ5PLc.swf\u0026amp;sdetail=p%3Abit.ly%2FdwMq4b\u0026amp;url_encoded_fmt_stream_map=itag%3D43%26url%3Dhttp%253A%252F%252Fo-o---preferred---sn-nwj7knek---v3---lscache4.c.youtube.com%252Fvideoplayback%253Fupn%253DsWh0pzcodo0%2526sparams%253Dcp%25252Cgcr%25252Cid%25252Cip%25252Cipbits%25252Citag%25252Cratebypass%25252Csource%25252Cupn%25252Cexpire%2526fexp%253D907722%25252C906062%25252C910102%25252C927104%25252C922401%25252C920704%25252C912806%25252C927201%25252C913546%25252C913556%25252C925109%25252C919003%25252C920201%25252C912706%25252C900816%2526ms%253Dau%2526expire%253D1349937946%2526itag%253D43%2526ipbits%253D8%2526gcr%253Dus%2526sver%253D3%2526ratebypass%253Dyes%2526mt%253D1349916311%2526ip%253D207.241.237.166%2526mv%253Dm%2526source%253Dyoutube%2526key%253Dyt1%2526cp%253DU0hTTllOVV9JUENOM19RSFlKOmVLUWdkTXRmS0dX%2526id%253Da078394896111c0d%26type%3Dvideo%252Fwebm%253B%2Bcodecs%253D%2522vp8.0%252C%2Bvorbis%2522%26fallback_host%3Dtc.v3.cache4.c.youtube.com%26sig%3DD879CD07A768B7D80A9C7D4E5DD16EDAC9DB4963.CDD2371FC76E7E959C559940842DC999573623D1%26quality%3Dmedium%2Citag%3D34%26url%3Dhttp%253A%252F%252Fo-o---preferred---sn-o097zne7---v18---lscache1.c.youtube.com%252Fvideoplayback%253Fupn%253DsWh0pzcodo0%2526sparams%253Dalgorithm%25252Cburst%25252Ccp%25252Cfactor%25252Cgcr%25252Cid%25252Cip%25252Cipbits%25252Citag%25252Csource%25252Cupn%25252Cexpire%2526fexp%253D907722%25252C906062%25252C910102%25252C927104%25252C922401%25252C920704%25252C912806%25252C927201%25252C913546%25252C913556%25252C925109%25252C919003%25252C920201%25252C912706%25252C900816%2526ms%253Dau%2526algorithm%253Dthrottle-factor%2526burst%253D40%2526ip%253D207.241.237.166%2526itag%253D34%2526gcr%253Dus%2526sver%253D3%2526mt%253D1349916311%2526mv%253Dm%2526source%253Dyoutube%2526key%253Dyt1%2526ipbits%253D8%2526factor%253D1.25%2526cp%253DU0hTTllOVV9JUENOM19RSFlKOmVLUWdkTXRmS0dX%2526expire%253D1349937946%2526id%253Da078394896111c0d%26type%3Dvideo%252Fx-flv%26fallback_host%3Dtc.v18.cache1.c.youtube.com%26sig%3DC397DCB00566E0FBB1551675B6108A4158C34557.CB3777882F05D65158C043C258FF8D4EBA90FA50%26quality%3Dmedium%2Citag%3D18%26url%3Dhttp%253A%252F%252Fo-o---preferred---sn-nwj7kned---v5---lscache6.c.youtube.com%252Fvideoplayback%253Fupn%253DsWh0pzcodo0%2526sparams%253Dcp%25252Cgcr%25252Cid%25252Cip%25252Cipbits%25252Citag%25252Cratebypass%25252Csource%25252Cupn%25252Cexpire%2526fexp%253D907722%25252C906062%25252C910102%25252C927104%25252C922401%25252C920704%25252C912806%25252C927201%25252C913546%25252C913556%25252C925109%25252C919003%25252C920201%25252C912706%25252C900816%2526ms%253Dau%2526expire%253D1349937946%2526itag%253D18%2526ipbits%253D8%2526gcr%253Dus%2526sver%253D3%2526ratebypass%253Dyes%2526mt%253D1349916311%2526ip%253D207.241.237.166%2526mv%253Dm%2526source%253Dyoutube%2526key%253Dyt1%2526cp%253DU0hTTllOVV9JUENOM19RSFlKOmVLUWdkTXRmS0dX%2526id%253Da078394896111c0d%26type%3Dvideo%252Fmp4%253B%2Bcodecs%253D%2522avc1.42001E%252C%2Bmp4a.40.2%2522%26fallback_host%3Dtc.v5.cache6.c.youtube.com%26sig%3D2A6196BFA95A0E8887CECC345A153937D8599592.5160A930EF6FDFF466FA41BAB7E76AD5CFE766B0%26quality%3Dmedium%2Citag%3D5%26url%3Dhttp%253A%252F%252Fo-o---preferred---sn-nwj7knek---v19---lscache4.c.youtube.com%252Fvideoplayback%253Fupn%253DsWh0pzcodo0%2526sparams%253Dalgorithm%25252Cburst%25252Ccp%25252Cfactor%25252Cgcr%25252Cid%25252Cip%25252Cipbits%25252Citag%25252Csource%25252Cupn%25252Cexpire%2526fexp%253D907722%25252C906062%25252C910102%25252C927104%25252C922401%25252C920704%25252C912806%25252C927201%25252C913546%25252C913556%25252C925109%25252C919003%25252C920201%25252C912706%25252C900816%2526ms%253Dau%2526algorithm%253Dthrottle-factor%2526burst%253D40%2526ip%253D207.241.237.166%2526itag%253D5%2526gcr%253Dus%2526sver%253D3%2526mt%253D1349916311%2526mv%253Dm%2526source%253Dyoutube%2526key%253Dyt1%2526ipbits%253D8%2526factor%253D1.25%2526cp%253DU0hTTllOVV9JUENOM19RSFlKOmVLUWdkTXRmS0dX%2526expire%253D1349937946%2526id%253Da078394896111c0d%26type%3Dvideo%252Fx-flv%26fallback_host%3Dtc.v19.cache4.c.youtube.com%26sig%3DA43F1CE03CC729FD57D1211C61F21AAB7C5AF20D.854D2A74C6CBA3160762D9FA75903D35A67382ED%26quality%3Dsmall%2Citag%3D36%26url%3Dhttp%253A%252F%252Fo-o---preferred---sn-nwj7kner---v4---lscache8.c.youtube.com%252Fvideoplayback%253Fupn%253DsWh0pzcodo0%2526sparams%253Dalgorithm%25252Cburst%25252Ccp%25252Cfactor%25252Cgcr%25252Cid%25252Cip%25252Cipbits%25252Citag%25252Csource%25252Cupn%25252Cexpire%2526fexp%253D907722%25252C906062%25252C910102%25252C927104%25252C922401%25252C920704%25252C912806%25252C927201%25252C913546%25252C913556%25252C925109%25252C919003%25252C920201%25252C912706%25252C900816%2526ms%253Dau%2526algorithm%253Dthrottle-factor%2526burst%253D40%2526ip%253D207.241.237.166%2526itag%253D36%2526gcr%253Dus%2526sver%253D3%2526mt%253D1349916311%2526mv%253Dm%2526source%253Dyoutube%2526key%253Dyt1%2526ipbits%253D8%2526factor%253D1.25%2526cp%253DU0hTTllOVV9JUENOM19RSFlKOmVLUWdkTXRmS0dX%2526expire%253D1349937946%2526id%253Da078394896111c0d%26type%3Dvideo%252F3gpp%253B%2Bcodecs%253D%2522mp4v.20.3%252C%2Bmp4a.40.2%2522%26fallback_host%3Dtc.v4.cache8.c.youtube.com%26sig%3D719E70BF679A7B41474D05D3706358168E217890.90B1765E62D594BEDEE837BB3F26FA82C0AC2C93%26quality%3Dsmall%2Citag%3D17%26url%3Dhttp%253A%252F%252Fo-o---preferred---sn-o097znee---v9---lscache5.c.youtube.com%252Fvideoplayback%253Fupn%253DsWh0pzcodo0%2526sparams%253Dalgorithm%25252Cburst%25252Ccp%25252Cfactor%25252Cgcr%25252Cid%25252Cip%25252Cipbits%25252Citag%25252Csource%25252Cupn%25252Cexpire%2526fexp%253D907722%25252C906062%25252C910102%25252C927104%25252C922401%25252C920704%25252C912806%25252C927201%25252C913546%25252C913556%25252C925109%25252C919003%25252C920201%25252C912706%25252C900816%2526ms%253Dau%2526algorithm%253Dthrottle-factor%2526burst%253D40%2526ip%253D207.241.237.166%2526itag%253D17%2526gcr%253Dus%2526sver%253D3%2526mt%253D1349916311%2526mv%253Dm%2526source%253Dyoutube%2526key%253Dyt1%2526ipbits%253D8%2526factor%253D1.25%2526cp%253DU0hTTllOVV9JUENOM19RSFlKOmVLUWdkTXRmS0dX%2526expire%253D1349937946%2526id%253Da078394896111c0d%26type%3Dvideo%252F3gpp%253B%2Bcodecs%253D%2522mp4v.20.3%252C%2Bmp4a.40.2%2522%26fallback_host%3Dtc.v9.cache5.c.youtube.com%26sig%3D8F24ED9FCC2500D100D1AAC9CD5A614B0C0FA5AA.6155DD5967D990C9F24D4862F7D70BCAF0914DA0%26quality%3Dsmall\u0026amp;watermark=%2Chttp%3A%2F%2Fs.ytimg.com%2Fyt%2Fimg%2Fwatermark%2Fyoutube_watermark-vflHX6b6E.png%2Chttp%3A%2F%2Fs.ytimg.com%2Fyt%2Fimg%2Fwatermark%2Fyoutube_hd_watermark-vflAzLcD6.png\u0026amp;sourceid=r\u0026amp;timestamp=1349916364\u0026amp;storyboard_spec=http%3A%2F%2Fi4.ytimg.com%2Fsb%2FoHg5SJYRHA0%2Fstoryboard3_L%24L%2F%24N.jpg%7C48%2327%23100%2310%2310%230%23default%23kFKafDpxazQDzs-N0NAkdH-jy_E%7C60%2345%23108%2310%2310%232000%23M%24M%233QCcFMpSH_MACnGTmY_ha2J8UU0%7C120%2390%23108%235%235%232000%23M%24M%23YJotj-gSka-wkwz-SF4GUW_h1Kk\u0026amp;plid=AATLveVba5g8mPZ8\u0026amp;showpopout=1\u0026amp;hl=en_US\u0026amp;tmi=1\u0026amp;iv_logging_level=4\u0026amp;st_module=http%3A%2F%2Fs.ytimg.com%2Fyt%2Fswfbin%2Fst_module-vflCXoloO.swf\u0026amp;no_get_video_log=1\u0026amp;iv_close_button=0\u0026amp;endscreen_module=http%3A%2F%2Fs.ytimg.com%2Fyt%2Fswfbin%2Fendscreen-vflK6XzTZ.swf\u0026amp;iv_read_url=http%3A%2F%2Fwww.youtube.com%2Fannotations_iv%2Fread2%3Fsparams%3Dexpire%252Cvideo_id%26expire%3D1349959800%26key%3Da1%26signature%3D815C68436F1E8F95A9283A421D758B7A6452EFD9.5029A9CC9CFCF79F0B17A60238447CA0FE7CA991%26video_id%3DoHg5SJYRHA0%26feat%3DCS\u0026amp;iv_queue_log_level=0\u0026amp;referrer=http%3A%2F%2Fbit.ly%2FdwMq4b\u0026amp;video_id=oHg5SJYRHA0\u0026amp;sw=1.0\u0026amp;sk=4md16KjsgYmUvVHOsiBQxSFIkPbju0d8C\u0026amp;pltype=contentugc\u0026amp;t=vjVQa1PpcFN8E8yJ1Q1BJFTy1GYmGAMgRZUyNC4FMBY%3D\u0026amp;loudness=-23.6900005341\"     allowscriptaccess=\"always\" allowfullscreen=\"true\" bgcolor=\"#000000\"\u003e\n  \u003cnoembed\u003e\u003cdiv class=\"yt-alert yt-alert-default yt-alert-error  yt-alert-player\"\u003e  \u003cdiv class=\"yt-alert-icon\"\u003e\n    \u003cimg s\u0072c=\"\/\/s.ytimg.com\/yt\/img\/pixel-vfl3z5WfW.gif\" class=\"icon master-sprite\" alt=\"Alert icon\"\u003e\n  \u003c\/div\u003e\n\u003cdiv class=\"yt-alert-buttons\"\u003e\u003c\/div\u003e\u003cdiv class=\"yt-alert-content\" role=\"alert\"\u003e    \u003cspan class=\"yt-alert-vertical-trick\"\u003e\u003c\/span\u003e\n    \u003cdiv class=\"yt-alert-message\"\u003e\n            You need Adobe Flash Player to watch this video. \u003cbr\u003e \u003ca href=\"\/\/get.adobe.com\/flashplayer\/\"\u003eDownload it from Adobe.\u003c\/a\u003e\n    \u003c\/div\u003e\n\u003c\/div\u003e\u003c\/div\u003e\u003c\/noembed\u003e\n\n";
-        document.getElementById('watch-player').innerHTML = swf;
-      })()
-    </script>
+          <div id="watch-player" class="flash-player"><video controls style="width:640px;height:390px;">
+  <source src="/dynamic/videos/<?php echo htmlspecialchars($_video['rid']); ?>.mp4" type="video/mp4">
+</video></div>
 
       <!-- begin watch-video-extra -->
       <div id="watch-video-extra">
@@ -439,6 +433,7 @@ else if ($_video['visibility'] == "v")
 										<button onclick=";return false;" title="Share or embed this video" type="button" class="yt-uix-tooltip-reverse yt-uix-button yt-uix-button-default yt-uix-tooltip" id="watch-share" data-button-action="yt.www.watch.actions.share" role="button"><span class="yt-uix-button-content">Share </span></button>
 										<button onclick=";window.location.href=this.getAttribute('href');return false;" href="/report?v=<?php echo $_video['rid']; ?>" title="Flag as inappropriate" type="button" class="yt-uix-tooltip-reverse  yt-uix-button yt-uix-button-default yt-uix-tooltip yt-uix-button-empty" id="watch-flag" data-button-action="yt.www.watch.actions.flag" role="button"><span class="yt-uix-button-icon-wrapper"><img class="yt-uix-button-icon yt-uix-button-icon-watch-flag" src="//s.ytimg.com/yt/img/pixel-vfl3z5WfW.gif" alt="Flag as inappropriate"><span class="yt-valign-trick"></span></span></button>
 										<button onclick=";return false;" title="Interactive Transcript" type="button" class="yt-uix-tooltip-reverse yt-uix-button yt-uix-button-default yt-uix-tooltip yt-uix-button-empty" id="watch-transcript" data-button-action="yt.www.watch.actions.transcript" role="button" data-tooltip-text="Interactive Transcript"><span class="yt-uix-button-icon-wrapper"><img class="yt-uix-button-icon yt-uix-button-icon-transcript" src="//web.archive.org/web/20121015065757im_/http://s.ytimg.com/yt/img/pixel-vfl3z5WfW.gif" alt="Interactive Transcript"><span class="yt-valign-trick"></span></span></button>
+										<button onclick=";window.location.href=this.getAttribute('href');return false;" class="yt-uix-tooltip-reverse yt-uix-button yt-uix-button-default yt-uix-tooltip yt-uix-button-empty" href="/dynamic/videos/<?php echo $_video['rid']; ?>.mp4">Download Video</a>
 									</div>
 									<div id="watch-actions-area-container" class="hid">
 										<div id="watch-actions-area" class="yt-rounded">
@@ -760,11 +755,11 @@ else
 											</div>
 											<ul id="watch-description-extra-info">
 												<li>
-													<div class="video-extras-sparkbars">
-														<div class="video-extras-sparkbar-likes" style="width: <?php echo $_video['likeswidth']; ?>%"></div>
-														<div class="video-extras-sparkbar-dislikes" style="width: <?php echo $_video['dislikeswidth']; ?>%"></div>
+													<div class="watch-sparkbars">
+														<div class="video-sparkbar-likes" style="width: <?php echo $_video['likeswidth']; ?>%"></div>
+														<div class="video-sparkbar-dislikes" style="width: <?php echo $_video['dislikeswidth']; ?>%"></div>
 													</div>
-													<span class="video-extras-likes-dislikes">
+													<span class="video-likes-dislikes">
 													<span class="likes"><?php echo $_video['likes']; ?></span> likes, <span class="dislikes"><?php echo $_video['dislikes']; ?></span> dislikes
 													</span>
 												</li>
@@ -961,8 +956,7 @@ while ($comment = $stmt->fetch(PDO::FETCH_ASSOC))
     $comment['likes'] -= $__video_h->get_comment_likes($comment['id'], false);
 ?>
 
-														<li class="comment yt-tile-default " data-author-viewing="" data-author-id="-uD01K8FQTeOSS5sniRFzQ" data-id="<?php echo $comment['id']; ?>" data-score="0">
-															<div class="comment-body">
+														<li class="comment" data-author-viewing="" data-author-id="-uD01K8FQTeOSS5sniRFzQ" data-id="<?php echo $comment['id']; ?>" data-score="0">
 																<div class="content-container">
 																	<div class="content">
 																		<div class="comment-text" dir="ltr">
@@ -998,26 +992,6 @@ while ($comment = $stmt->fetch(PDO::FETCH_ASSOC))
     } ?>
 																		</p>
 																	</div>
-																	<div class="comment-actions">
-																		<span class="yt-uix-button-group"><button type="button" class="start comment-action-vote-up comment-action yt-uix-button yt-uix-button-default yt-uix-tooltip yt-uix-button-empty" onclick=";return false;" title="Vote Up" data-action="vote-up" data-tooltip-show-delay="300" role="button"><span class="yt-uix-button-icon-wrapper"><img class="yt-uix-button-icon yt-uix-button-icon-watch-comment-vote-up" src="//s.ytimg.com/yt/img/pixel-vfl3z5WfW.gif" alt="Vote Up"><span class="yt-valign-trick"></span></span></button><button type="button" class="end comment-action-vote-down comment-action yt-uix-button yt-uix-button-default yt-uix-tooltip yt-uix-button-empty" onclick=";return false;" title="Vote Down" data-action="vote-down" data-tooltip-show-delay="300" role="button"><span class="yt-uix-button-icon-wrapper"><img class="yt-uix-button-icon yt-uix-button-icon-watch-comment-vote-down" src="//s.ytimg.com/yt/img/pixel-vfl3z5WfW.gif" alt="Vote Down"><span class="yt-valign-trick"></span></span></button></span>
-																		<span class="yt-uix-button-group">
-																			<button type="button" 
-																					class="start comment-action yt-uix-button yt-uix-button-default" 
-																					onclick=";$('#reply_to_<?php echo $comment['id']; ?>').show();return false;" data-action="reply" role="button"><span class="yt-uix-button-content">Reply</span>
-																			</button><button type="button" class="end flip yt-uix-button yt-uix-button-default yt-uix-button-empty" onclick=";return false;" data-button-has-sibling-menu="true" role="button" aria-pressed="false" aria-expanded="false" aria-haspopup="true" aria-activedescendant="">
-																				<img class="yt-uix-button-arrow" src="//s.ytimg.com/yt/img/pixel-vfl3z5WfW.gif" alt="">
-																				<div class=" yt-uix-button-menu yt-uix-button-menu-default" style="display: none;">
-																					<ul>
-																						<li class="comment-action" data-action="share"><span class="yt-uix-button-menu-item">Share</span></li>
-																						<li class="comment-action-remove comment-action" data-action="remove"><span class="yt-uix-button-menu-item">Remove</span></li>
-																						<li class="comment-action" data-action="flag"><span class="yt-uix-button-menu-item">Flag for spam</span></li>
-																						<li class="comment-action-block comment-action" data-action="block"><span class="yt-uix-button-menu-item">Block User</span></li>
-																						<li class="comment-action-unblock comment-action" data-action="unblock"><span class="yt-uix-button-menu-item">Unblock User</span></li>
-																					</ul>
-																				</div>
-																			</button>
-																		</span>
-																	</div>
 																<?php if (isset($_SESSION['siteusername']))
     { ?> 
 																	<li id="reply_to_<?php echo $comment['id']; ?>" style="display: none;" class="comment yt-tile-default  child" data-tag="O" data-author-viewing="" data-id="iRV7EkT9us81mDLFDSB6FAsB156Fdn13HUmTm26C3PE" data-score="34" data-author="<?php echo htmlspecialchars($row['author']); ?>">
@@ -1033,7 +1007,6 @@ while ($comment = $stmt->fetch(PDO::FETCH_ASSOC))
 																				<input style="display: none;" name="id" value="<?php echo $row['id']; ?>">
 																				
 																			</form>
-																		</div>
 																	</div>
 																<?php
     } ?>
@@ -1426,25 +1399,6 @@ while ($video = $stmt->fetch(PDO::FETCH_ASSOC))
 			  yt.registerGlobal('gYouTubePlayerReady');
 			}
 		</script>
-		<script>
-    yt = yt || {};
-      yt.playerConfig = {"assets": {"css_actions": "\/\/s.ytimg.com\/yt\/cssbin\/www-player-actions-vflWsl9n_.css", "html": "\/html5_player_template", "css": "\/\/s.ytimg.com\/yt\/cssbin\/www-player-vflE5bu0u.css", "js": "\/\/s.ytimg.com\/yt\/jsbin\/html5player-vfl1S0-AB.js"}, "url": "\/\/s.ytimg.com\/yt\/swfbin\/watch_as3-vfloWhEvq.swf", "min_version": "8.0.0", "args": {"fexp": "907722,906062,910102,927104,922401,920704,912806,927201,913546,913556,925109,919003,920201,912706,900816", "ptk": "youtube_multi", "enablecsi": "1", "allow_embed": 1, "rvs": "", "vq": "auto", "account_playback_token": "", "autohide": "2", "csi_page_type": "watch5", "keywords": "<?php echo htmlspecialchars($_video['tags']); ?>", "cr": "US", "iv3_module": "\/\/s.ytimg.com\/yt\/swfbin\/iv3_module-vflGCS_pr.swf", "fmt_list": "43\/320x240\/99\/0\/0,34\/320x240\/9\/0\/115,18\/320x240\/9\/0\/115,5\/320x240\/7\/0\/0,36\/320x240\/99\/0\/0,17\/176x144\/99\/0\/0", "title": "<?php echo htmlspecialchars($_video['title']); ?>", "length_seconds": <?php echo $_video['duration']; ?>, "enablejsapi": 1, "advideo": "1", "tk": "o3_r7m6s_HAaFxeywi14S3qFcY4uSrEiWfZ8KVUoyEB_gj1rlrELuQ==", "iv_load_policy": 1, "iv_module": "\/\/s.ytimg.com\/yt\/swfbin\/iv_module-vflBJ5PLc.swf", "sdetail": "p:bit.ly\/dwMq4b", "url_encoded_fmt_stream_map": "", "watermark": ",\/\/s.ytimg.com\/yt\/img\/watermark\/youtube_watermark-vflHX6b6E.png,\/\/s.ytimg.com\/yt\/img\/watermark\/youtube_hd_watermark-vflAzLcD6.png", "sourceid": "r", "timestamp": 1349916364, "storyboard_spec": "", "plid": "AATLveVba5g8mPZ8", "showpopout": 1, "hl": "en_US", "tmi": "1", "iv_logging_level": 4, "st_module": "\/\/s.ytimg.com\/yt\/swfbin\/st_module-vflCXoloO.swf", "no_get_video_log": "1", "iv_close_button": 0, "endscreen_module": "\/\/s.ytimg.com\/yt\/swfbin\/endscreen-vflK6XzTZ.swf", "iv_read_url": "\/\/www.youtube.com\/annotations_iv\/read2?sparams=expire%2Cvideo_id\u0026expire=1349959800\u0026key=a1\u0026signature=815C68436F1E8F95A9283A421D758B7A6452EFD9.5029A9CC9CFCF79F0B17A60238447CA0FE7CA991\u0026video_id=oHg5SJYRHA0\u0026feat=CS", "iv_queue_log_level": 0, "referrer": "\/\/bit.ly\/dwMq4b", "video_id": "<?php echo htmlspecialchars($_video['rid']); ?>", "sw": "1.0", "sk": "4md16KjsgYmUvVHOsiBQxSFIkPbju0d8C", "pltype": "contentugc", "t": "vjVQa1PpcFN8E8yJ1Q1BJFTy1GYmGAMgRZUyNC4FMBY=", "loudness": -23.6900005341}, "url_v9as2": "\/\/s.ytimg.com\/yt\/swfbin\/cps-vfl2Ur0rq.swf", "params": {"allowscriptaccess": "always", "allowfullscreen": "true", "bgcolor": "#000000"}, "attrs": {"id": "movie_player"}, "url_v8": "\/\/s.ytimg.com\/yt\/swfbin\/cps-vfl2Ur0rq.swf", "html5": false};
-      yt.setConfig({
-    'EMBED_HTML_TEMPLATE': "\u003ciframe width=\"__width__\" height=\"__height__\" src=\"__url__\" frameborder=\"0\" allowfullscreen\u003e\u003c\/iframe\u003e",
-    'EMBED_HTML_URL': "\/\/www.youtube.com\/embed\/__videoid__"
-  });
-    yt.setMsg('FLASH_UPGRADE', "\u003cdiv class=\"yt-alert yt-alert-default yt-alert-error  yt-alert-player\"\u003e  \u003cdiv class=\"yt-alert-icon\"\u003e\n    \u003cimg s\u0072c=\"\/\/s.ytimg.com\/yt\/img\/pixel-vfl3z5WfW.gif\" class=\"icon master-sprite\" alt=\"Alert icon\"\u003e\n  \u003c\/div\u003e\n\u003cdiv class=\"yt-alert-buttons\"\u003e\u003c\/div\u003e\u003cdiv class=\"yt-alert-content\" role=\"alert\"\u003e    \u003cspan class=\"yt-alert-vertical-trick\"\u003e\u003c\/span\u003e\n    \u003cdiv class=\"yt-alert-message\"\u003e\n            You need to upgrade your Adobe Flash Player to watch this video. \u003cbr\u003e \u003ca href=\"\/\/get.adobe.com\/flashplayer\/\"\u003eDownload it from Adobe.\u003c\/a\u003e\n    \u003c\/div\u003e\n\u003c\/div\u003e\u003c\/div\u003e");
-  yt.setMsg('PLAYER_FALLBACK', "\u003cdiv class=\"yt-alert yt-alert-default yt-alert-error  yt-alert-player\"\u003e  \u003cdiv class=\"yt-alert-icon\"\u003e\n    \u003cimg s\u0072c=\"\/\/s.ytimg.com\/yt\/img\/pixel-vfl3z5WfW.gif\" class=\"icon master-sprite\" alt=\"Alert icon\"\u003e\n  \u003c\/div\u003e\n\u003cdiv class=\"yt-alert-buttons\"\u003e\u003c\/div\u003e\u003cdiv class=\"yt-alert-content\" role=\"alert\"\u003e    \u003cspan class=\"yt-alert-vertical-trick\"\u003e\u003c\/span\u003e\n    \u003cdiv class=\"yt-alert-message\"\u003e\n            The Adobe Flash Player or an HTML5 supported browser is required for video playback. \u003cbr\u003e \u003ca href=\"\/\/get.adobe.com\/flashplayer\/\"\u003eGet the latest Flash Player\u003c\/a\u003e \u003cbr\u003e \u003ca href=\"\/html5\"\u003eLearn more about upgrading to an HTML5 browser\u003c\/a\u003e\n    \u003c\/div\u003e\n\u003c\/div\u003e\u003c\/div\u003e");
-  yt.setMsg('QUICKTIME_FALLBACK', "\u003cdiv class=\"yt-alert yt-alert-default yt-alert-error  yt-alert-player\"\u003e  \u003cdiv class=\"yt-alert-icon\"\u003e\n    \u003cimg s\u0072c=\"\/\/s.ytimg.com\/yt\/img\/pixel-vfl3z5WfW.gif\" class=\"icon master-sprite\" alt=\"Alert icon\"\u003e\n  \u003c\/div\u003e\n\u003cdiv class=\"yt-alert-buttons\"\u003e\u003c\/div\u003e\u003cdiv class=\"yt-alert-content\" role=\"alert\"\u003e    \u003cspan class=\"yt-alert-vertical-trick\"\u003e\u003c\/span\u003e\n    \u003cdiv class=\"yt-alert-message\"\u003e\n            The Adobe Flash Player or QuickTime is required for video playback. \u003cbr\u003e \u003ca href=\"\/\/get.adobe.com\/flashplayer\/\"\u003eGet the latest Flash Player\u003c\/a\u003e \u003cbr\u003e \u003ca href=\"\/\/www.apple.com\/quicktime\/download\/\"\u003eGet the latest version of QuickTime\u003c\/a\u003e\n    \u003c\/div\u003e\n\u003c\/div\u003e\u003c\/div\u003e");
-
-
-    (function() {
-      var forceUpdate = yt.www.watch.player.updateConfig(yt.playerConfig);
-      var youTubePlayer = yt.player.update('watch-player', yt.playerConfig,
-          forceUpdate, gYouTubePlayerReady);
-      yt.setConfig({'PLAYER_REFERENCE': youTubePlayer});
-    })();
-  </script>
   
   <?php if (@$_SESSION['siteusername'] == $_video['author'])
 { ?>
