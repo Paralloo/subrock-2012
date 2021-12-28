@@ -52,6 +52,7 @@
 								</h2>
 								<div id="guide-builder-promo-buttons" class="signed-out">
 									<button href="/sign_in" type="button" class=" yt-uix-button yt-uix-button-dark" onclick=";window.location.href=this.getAttribute('href');return false;" role="button"><span class="yt-uix-button-content">Sign In </span></button>
+									<button href="/sign_up" type="button" class=" yt-uix-button yt-uix-button-primary" onclick=";window.location.href=this.getAttribute('href');return false;" role="button"><span class="yt-uix-button-content">Create Account </span></button>
 								</div>
 								<?php } else { ?>
 									<div id="guide-builder-promo">
