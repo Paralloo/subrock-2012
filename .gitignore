@@ -4,4 +4,5 @@ composer.json
 composer.json.dist
 composer.lock
 dynamic/
-s/classes/config.ing.php
+!dynamic/pfp/default.png
+s/classes/config.inc.php
