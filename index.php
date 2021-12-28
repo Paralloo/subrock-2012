@@ -248,13 +248,15 @@ else
 								<img src="//s.ytimg.com/yt/img/pixel-vfl3z5WfW.gif" alt="">
 								</a>
 							</div>
-							<h3 class="sidebar-module-header">Announcements</h3>
-							<h2>SubRocks is back!</h2>
+							<h3 class="sidebar-module-header">Spotlight</h3>
+							<h2>What the fuck happended?</h2>
 							<p class="sidebar-module-description">
-								I have decided to bring SubRocks back <br>  Let's hope SubRock is better than bhief's SubRocks
+								SonicGamingTV2019 went rogue and basically IP banned me because
+								someone wrote erotic bluey fanfiction. This is fucking autistic
+								and I've never seen drama this FUCKING PATHETIC.
 							</p>
 							<p class="sidebar-module-description">
-								Presented by: <a href="/user/billygoat891">billygoat891</a>
+								Presented by: <a href="/user/bluey2000k">Bluey2000k</a>
 							</p>
 							<ul>
 								<?php
